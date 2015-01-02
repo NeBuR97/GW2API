@@ -1,33 +1,36 @@
 package de.nebur97.git.gw2api.item;
 
-import java.net.URL;
+import de.nebur97.git.gw2api.enumerations.type.armor.ARMOR;
+import de.nebur97.git.gw2api.enumerations.type.armor.ARMOR.WeightClass;
 
-import de.nebur97.git.gw2api.type.armor.ARMOR;
+public class Armor extends Item {
 
-public class Armor implements Item {
-
-	private int id;
 	private ARMOR type;
 	private int def;
+	private WeightClass wClass;
+	public int getDefense()
+	{
+		return def;
+	}
 	
 	@Override
-	public int getID() {
-		return 0;
+	public void setType(String type)
+	{
+		this.type = ARMOR.valueOf(type);
 	}
-
 	@Override
-	public String getName() {
-		return null;
+	public ARMOR getType()
+	{
+		return type;
 	}
-
-	@Override
-	public ARMOR getType() {
-		return null;
+	public WeightClass getWeightClass()
+	{
+		return wClass;
 	}
-
-	@Override
-	public URL getIcon() {
-		return null;
+	public void setDefense(int def) {
+		this.def = def;
 	}
-
+	public void setWeightClass(String wClass) {
+		this.wClass = ARMOR.WeightClass.valueOf(wClass);
+	}
 }

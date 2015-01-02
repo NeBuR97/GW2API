@@ -1,4 +1,4 @@
-package de.nebur97.git.gw2api.type;
+package de.nebur97.git.gw2api.enumerations.type;
 
 public enum GearType {
 	ARMOR,
