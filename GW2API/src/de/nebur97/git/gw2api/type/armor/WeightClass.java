@@ -11,13 +11,13 @@ public enum WeightClass
 {
     /** Heavy armor **/
     HEAVY,
-
+    
     /** Medium armor **/
     MEDIUM,
-
+    
     /** Light armor **/
     LIGHT,
-
+    
     /** Town clothing **/
     CLOTHING;
 }

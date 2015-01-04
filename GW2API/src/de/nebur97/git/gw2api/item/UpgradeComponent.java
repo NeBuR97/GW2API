@@ -10,52 +10,57 @@ import de.nebur97.git.gw2api.type.upgradecomponent.UpgradeCompType;
 public class UpgradeComponent extends Item
 {
     private List<UpgradeCompFlag> flags = new ArrayList<UpgradeCompFlag>();
-    private String suffix;
-    private Infusion applicableInfusion;
+    private String		suffix;
+    private Infusion	      applicableInfusion;
     
     /**
      * Set the upgrade'S type.
+     * 
      * @param t
      */
     public void setType(String t)
     {
 	setType(UpgradeCompType.valueOf(t.toUpperCase()));
     }
-
+    
     /**
      * Get the name suffix.
+     * 
      * @return name suffix
      */
     public String getSuffix()
     {
-        return suffix;
+	return suffix;
     }
-
+    
     /**
      * Set the name suffix.
+     * 
      * @param suffix
      */
     public void setSuffix(String suffix)
     {
-        this.suffix = suffix;
+	this.suffix = suffix;
     }
-
+    
     /**
      * Get the applicable infusion.
+     * 
      * @return infusion
      */
     public Infusion getApplicableInfusion()
     {
-        return applicableInfusion;
+	return applicableInfusion;
     }
-
+    
     /**
      * Set the applicable infusion.
+     * 
      * @param applicableInfusion
      */
     public void setApplicableInfusion(Infusion applicableInfusion)
     {
-        this.applicableInfusion = applicableInfusion;
+	this.applicableInfusion = applicableInfusion;
     }
     
     /**
@@ -64,10 +69,9 @@ public class UpgradeComponent extends Item
      */
     public void setApplicableInfusion(String inf)
     {
-	try{
+	try {
 	    setApplicableInfusion(Infusion.valueOf(inf.toUpperCase()));
-	}catch(Exception e)
-	{
+	} catch(Exception e) {
 	    e.printStackTrace();
 	    setApplicableInfusion(Infusion.NONE);
 	}
@@ -75,6 +79,7 @@ public class UpgradeComponent extends Item
     
     /**
      * Add a flag.
+     * 
      * @param f
      * @see UpgradeCompFlag
      */
@@ -93,6 +98,7 @@ public class UpgradeComponent extends Item
     
     /**
      * Get all upgrade flags
+     * 
      * @return an array of upgrade flags.
      */
     public UpgradeCompFlag[] getUpgradeFlags()

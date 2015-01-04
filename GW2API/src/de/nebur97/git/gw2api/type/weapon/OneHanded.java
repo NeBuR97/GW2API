@@ -16,37 +16,37 @@ public enum OneHanded implements WeaponType
 	}
     },
     SWORD;
-
+    
     @Override
     public boolean isAquatic()
     {
 	return false;
     }
-
+    
     @Override
     public boolean isOffHand()
     {
 	return false;
     }
-
+    
     @Override
     public boolean isOneHanded()
     {
 	return true;
     }
-
+    
     @Override
     public boolean isOther()
     {
 	return false;
     }
-
+    
     @Override
     public boolean isTwoHanded()
     {
 	return false;
     }
-
+    
     @Override
     public boolean canBeOffHand()
     {

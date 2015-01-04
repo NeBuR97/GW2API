@@ -14,7 +14,7 @@ public class Armor extends Gear
 {
     private int	 def;
     private WeightClass wClass;
-   
+    
     /**
      * Gets the armor's defense value.
      * 
@@ -24,7 +24,7 @@ public class Armor extends Gear
     {
 	return def;
     }
-
+    
     /**
      * Sets the armor's defense value.
      * 
@@ -34,7 +34,7 @@ public class Armor extends Gear
     {
 	this.def = def;
     }
-
+    
     /**
      * Gets the armor's weight class.
      * 
@@ -45,7 +45,7 @@ public class Armor extends Gear
     {
 	return wClass;
     }
-
+    
     /**
      * Sets the weight class.
      * 
@@ -56,10 +56,10 @@ public class Armor extends Gear
     {
 	this.wClass = WeightClass.valueOf(wClass.toUpperCase());
     }
-
+    
     public void setType(String type)
     {
 	setType(ArmorType.valueOf(type.toUpperCase()));
     }
-
+    
 }

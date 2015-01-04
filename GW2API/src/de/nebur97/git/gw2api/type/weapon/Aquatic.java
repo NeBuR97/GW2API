@@ -10,37 +10,37 @@ package de.nebur97.git.gw2api.type.weapon;
 public enum Aquatic implements WeaponType
 {
     HARPOON, SPEARGUN, TRIDENT;
-
+    
     @Override
     public boolean isAquatic()
     {
 	return true;
     }
-
+    
     @Override
     public boolean isOffHand()
     {
 	return false;
     }
-
+    
     @Override
     public boolean isOneHanded()
     {
 	return false;
     }
-
+    
     @Override
     public boolean isOther()
     {
 	return false;
     }
-
+    
     @Override
     public boolean isTwoHanded()
     {
 	return true;
     }
-
+    
     @Override
     public boolean canBeOffHand()
     {

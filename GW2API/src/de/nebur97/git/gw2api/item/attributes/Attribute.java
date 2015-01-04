@@ -21,7 +21,7 @@ public class Attribute
 	 * Condition Damage
 	 */
 	CONDITIONDAMAGE,
-
+	
 	/**
 	 * Ferocity
 	 */
@@ -32,7 +32,7 @@ public class Attribute
 		return "Ferocity";
 	    }
 	},
-
+	
 	/**
 	 * Healing Power
 	 */
@@ -43,37 +43,37 @@ public class Attribute
 		return "Healing Power";
 	    }
 	},
-
+	
 	/**
 	 * Power
 	 */
 	POWER,
-
+	
 	/**
 	 * Precision
 	 */
 	PRECISION,
-
+	
 	/**
 	 * Toughness
 	 */
 	TOUGHNESS,
-
+	
 	/**
 	 * Vitality
 	 */
 	VITALITY;
     }
-
+    
     private int	   modifier;
     private AttributeType aT;
-
+    
     private Attribute(AttributeType aT, int mod)
     {
 	this.aT = aT;
 	modifier = mod;
     }
-
+    
     /**
      * @return The attribute's modifier.
      */
@@ -81,7 +81,7 @@ public class Attribute
     {
 	return modifier;
     }
-
+    
     /**
      * @return The attribute's type
      * @see AttributeType
@@ -90,7 +90,7 @@ public class Attribute
     {
 	return aT;
     }
-
+    
     /**
      * Creates a new Attribute.
      * 
@@ -100,15 +100,13 @@ public class Attribute
      */
     public static Attribute createAttribute(String type, int modifier)
     {
-	try
-	{
+	try {
 	    return createAttribute(AttributeType.valueOf(type), modifier);
-	} catch(Exception e)
-	{
+	} catch(Exception e) {
 	    return null;
 	}
     }
-
+    
     /**
      * Creates a new Attribute.<br>
      * E.g: Exotic lvl 80 boots with Berserker stats:<br>

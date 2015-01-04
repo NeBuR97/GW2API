@@ -2,8 +2,9 @@ package de.nebur97.git.gw2api.type.container;
 
 /**
  * Possible types of container.
+ * 
  * @author NeBuR97
- *
+ * 
  */
 public enum ContainerType
 {

@@ -4,8 +4,9 @@ import de.nebur97.git.gw2api.type.gathering.GatheringType;
 
 /**
  * Gathering tool.
+ * 
  * @author NeBuR97
- *
+ * 
  */
 public class Gathering extends Item
 {

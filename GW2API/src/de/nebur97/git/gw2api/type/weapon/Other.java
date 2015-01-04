@@ -21,7 +21,7 @@ public enum Other implements WeaponType
 	{
 	    return true;
 	}
-
+	
     },
     UNKNOWN() {
 	@Override
@@ -30,37 +30,37 @@ public enum Other implements WeaponType
 	    return false;
 	}
     };
-
+    
     @Override
     public boolean isAquatic()
     {
 	return false;
     }
-
+    
     @Override
     public boolean isOffHand()
     {
 	return false;
     }
-
+    
     @Override
     public boolean isOneHanded()
     {
 	return false;
     }
-
+    
     @Override
     public boolean isOther()
     {
 	return true;
     }
-
+    
     @Override
     public boolean isTwoHanded()
     {
 	return false;
     }
-
+    
     @Override
     public boolean canBeOffHand()
     {

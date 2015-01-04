@@ -11,10 +11,10 @@ public enum TrinketType
 {
     /** Earrings **/
     ACCESSORY,
-
+    
     /** Amulets **/
     AMULET,
-
+    
     /** Rings **/
     RING;
 }

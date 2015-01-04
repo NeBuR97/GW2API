@@ -15,7 +15,7 @@ package de.nebur97.git.gw2api.type;
  **/
 public enum Type
 {
-
+    
     /**
      * Armor.
      * 
@@ -23,21 +23,21 @@ public enum Type
      * @see de.nebur97.git.gw2api.item.Armor Armor(Item implementation)
      **/
     ARMOR,
-
+    
     /**
      * Back items.
      * 
      * @see de.nebur97.git.gw2api.item.Back Back
      */
     BACK,
-
+    
     /**
      * Inventory bags.
      * 
      * @see de.nebur97.git.gw2api.item.Bag Bag
      */
     BAG,
-
+    
     /**
      * Consumables.
      * 
@@ -47,56 +47,56 @@ public enum Type
      * implementation)
      */
     CONSUMABLE,
-
+    
     /**
      * Container.
      * 
      * @see de.nebur97.git.gw2api.item.Container Container
      */
     CONTAINER,
-
+    
     /**
      * Crafting material.
      * 
      * @see de.nebur97.git.gw2api.item.CraftingMaterial CraftingMaterial
      */
     CRAFTINGMATERIAL,
-
+    
     /**
      * Gathering tools.
      * 
      * @see de.nebur97.git.gw2api.item.Gathering Gathering
      */
     GATHERING,
-
+    
     /**
      * Gizmos.
      * 
      * @see de.nebur97.git.gw2api.item.Gizmo Gizmo
      */
     GIZMO,
-
+    
     /**
      * Miniatures.
      * 
      * @see de.nebur97.git.gw2api.item.MiniPet MiniPet
      */
     MINIPET,
-
+    
     /**
      * Salvage kits.
      * 
      * @see de.nebur97.git.gw2api.item.Tool Tool
      */
     TOOL,
-
+    
     /**
      * Trait guides.
      * 
      * @see de.nebur97.git.gw2api.item.Trait Trait
      */
     TRAIT,
-
+    
     /**
      * Trinkets.
      * 
@@ -104,21 +104,21 @@ public enum Type
      * @see de.nebur97.git.gw2api.item.Trinket Trinket(Item impl)
      */
     TRINKET,
-
+    
     /**
      * Trophies.
      * 
      * @see de.nebur97.git.gw2api.item.Trophy Trophy
      */
     TROPHY,
-
+    
     /**
      * Upgrade components.
      * 
      * @see de.nebur97.git.gw2api.item.UpgradeComponent UpgradeComponent
      */
     UPGRADECOMPONENT,
-
+    
     /**
      * Weapons.
      * 

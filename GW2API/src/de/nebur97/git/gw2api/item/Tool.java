@@ -4,12 +4,14 @@ import de.nebur97.git.gw2api.type.Type;
 
 /**
  * A SalvageKit.
+ * 
  * @author NeBuR97
  * @see Type#TOOL
  */
 public class Tool extends Item
 {
     private int charges;
+    
     @Override
     public Type getType()
     {
@@ -18,19 +20,21 @@ public class Tool extends Item
     
     /**
      * Get the kit's charges.
+     * 
      * @return charges
      */
     public int getCharges()
     {
-        return charges;
+	return charges;
     }
     
     /**
      * Set the kit'S charges.
+     * 
      * @param charges
      */
     public void setCharges(int charges)
     {
-        this.charges = charges;
+	this.charges = charges;
     }
 }

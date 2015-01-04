@@ -14,37 +14,37 @@ public enum ConsumableType
 {
     /** For Total Makeover Kits, Self-Style Hair Kits, and Name Change Contracts **/
     APPEARENCECHANGE,
-
+    
     /** Alcohol consumables **/
     BOOZE,
-
+    
     /** For Trading Post Express, Merchant Express, Golem Banker **/
     CONTRACTNPC,
-
+    
     /** Food consumables **/
     FOOD,
-
+    
     /** Various consumables **/
     GENERIC,
-
+    
     /** Some boosters **/
     HALLOWEEN,
-
+    
     /**
      * Consumables granting immediate effect (most boosters, Heavy Tome of
      * Knowledge)
      **/
     IMMEDIATE,
-
+    
     /** Skin consumables **/
     TRANSMUTATION,
-
+    
     /** Unlock consumables **/
     UNLOCK,
-
+    
     /** For Upgrade Extractor **/
     UPGRADEREMOVAL,
-
+    
     /** Utility boosts (Potions etc.) **/
     UTILITY;
 }
