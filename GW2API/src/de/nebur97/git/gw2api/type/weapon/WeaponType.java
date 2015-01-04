@@ -13,4 +13,10 @@ public interface WeaponType
     public boolean isTwoHanded();
     
     public boolean canBeOffHand();
+    
+    /**
+     * 
+     * @return a {@link WEAPON} constant.
+     */
+    public WEAPON getCategory();
 }

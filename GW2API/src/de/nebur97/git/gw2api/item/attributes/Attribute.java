@@ -65,7 +65,7 @@ public class Attribute
 	VITALITY;
     }
     
-    private int	   modifier;
+    private int modifier;
     private AttributeType aT;
     
     private Attribute(AttributeType aT, int mod)

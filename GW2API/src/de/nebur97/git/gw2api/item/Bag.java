@@ -9,7 +9,7 @@ import de.nebur97.git.gw2api.type.Type;
  **/
 public class Bag extends Item
 {
-    private int     size;
+    private int size;
     private boolean noSellSort;
     
     @Override

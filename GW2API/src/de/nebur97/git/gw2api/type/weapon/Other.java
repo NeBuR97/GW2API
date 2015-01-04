@@ -66,4 +66,10 @@ public enum Other implements WeaponType
     {
 	return false;
     }
+
+    @Override
+    public WEAPON getCategory()
+    {
+	return WEAPON.OTHER;
+    }
 }

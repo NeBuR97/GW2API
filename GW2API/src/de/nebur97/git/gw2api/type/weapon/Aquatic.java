@@ -46,4 +46,10 @@ public enum Aquatic implements WeaponType
     {
 	return false;
     }
+
+    @Override
+    public WEAPON getCategory()
+    {
+	return WEAPON.AQUATIC;
+    }
 }

@@ -42,41 +42,42 @@ public enum WEAPON
     TWOHANDED;
     
     /**
-     * Will only be returned when no other type could be found
+     * Returns the specified WeaponType. Throws an excpetion if no type can be found.
+     * @throws IllegalArgumentException
+     * @param type
+     * @return a WeaponType
      */
-    
-    public static WeaponType getWeaponType(String type)
+    public static WeaponType getWeaponType(String type) throws IllegalArgumentException
     {
-	WeaponType wType = Other.UNKNOWN;
 	// check if type is mentioned in Aquatic
 	try {
-	    wType = Aquatic.valueOf(type);
+	   return Aquatic.valueOf(type);
 	} catch(Exception e) {/* Type is not aquatic */
 	}
 	
 	// offhand
 	try {
-	    wType = OffHand.valueOf(type);
+	    return OffHand.valueOf(type);
 	} catch(Exception e) {/* Type is not an offhand */
 	}
 	
 	// one-handed
 	try {
-	    wType = OneHanded.valueOf(type);
+	    return OneHanded.valueOf(type);
 	} catch(Exception e) {/* Type is not one-handed */
 	}
 	
 	// other
 	try {
-	    wType = Other.valueOf(type);
+	    return Other.valueOf(type);
 	} catch(Exception e) {/* Type is not in other */
 	}
 	
 	// Twohanded
 	try {
-	    wType = TwoHanded.valueOf(type);
+	    return TwoHanded.valueOf(type);
 	} catch(Exception e) {/* Type is not two-handed */
 	}
-	return wType;
+	throw new IllegalArgumentException(type+" is not a WeaponType!");
     }
 }

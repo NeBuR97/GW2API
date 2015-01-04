@@ -45,4 +45,10 @@ public enum OffHand implements WeaponType
     {
 	return true;
     }
+
+    @Override
+    public WEAPON getCategory()
+    {
+	return WEAPON.OFFHAND;
+    }
 }

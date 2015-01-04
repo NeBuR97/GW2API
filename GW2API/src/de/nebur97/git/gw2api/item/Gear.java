@@ -7,11 +7,17 @@ import de.nebur97.git.gw2api.item.attributes.Attribute;
 import de.nebur97.git.gw2api.item.infusions.Infusable;
 import de.nebur97.git.gw2api.item.infusions.Infusion;
 
+/**
+ * Wearable items (Armor and such).
+ * 
+ * @author NeBuR97
+ * 
+ */
 public class Gear extends Item implements Infusable
 {
     private List<Attribute> stats = new ArrayList<Attribute>();
-    private Infusion	iF    = Infusion.NONE;
-    private int	     suffixID;
+    private Infusion iF = Infusion.NONE;
+    private int suffixID;
     
     /**
      * Get an array containing all added attributes.

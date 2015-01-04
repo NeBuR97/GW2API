@@ -12,7 +12,7 @@ import de.nebur97.git.gw2api.type.armor.WeightClass;
  **/
 public class Armor extends Gear
 {
-    private int	 def;
+    private int def;
     private WeightClass wClass;
     
     /**
@@ -57,6 +57,10 @@ public class Armor extends Gear
 	this.wClass = WeightClass.valueOf(wClass.toUpperCase());
     }
     
+    /**
+     * @see Item#setType(Object)
+     * @param type
+     */
     public void setType(String type)
     {
 	setType(ArmorType.valueOf(type.toUpperCase()));

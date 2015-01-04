@@ -10,9 +10,9 @@ import de.nebur97.git.gw2api.type.consumable.UnlockType;
  **/
 public class Consumable extends Item
 {
-    private long       durMS;
-    private int	colorID;
-    private int	recipeID;
+    private long durMS;
+    private int colorID;
+    private int recipeID;
     private UnlockType unlockType = UnlockType.NONE;
     
     public void setType(String t)

@@ -21,18 +21,18 @@ import de.nebur97.git.gw2api.rarity.Rarity;
  * 
  * @author NeBuR97
  **/
-class Item
+public class Item
 {
-    private int	       id;
-    private String	    name;
-    private Object	    type;
-    private URL	       icon;
-    private String	    desc;
-    private Rarity	    rare;
-    private int	       level;
-    private int	       vendorValue;
-    private List<GameType>    gameTypes    = new ArrayList<GameType>();
-    private List<Flag>	flags	= new ArrayList<Flag>();
+    private int id;
+    private String name;
+    private Object type;
+    private URL icon;
+    private String desc;
+    private Rarity rare;
+    private int level;
+    private int vendorValue;
+    private List<GameType> gameTypes = new ArrayList<GameType>();
+    private List<Flag> flags = new ArrayList<Flag>();
     private List<Restriction> restrictions = new ArrayList<Restriction>();
     
     /**

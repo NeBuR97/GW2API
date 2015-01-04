@@ -10,8 +10,8 @@ import de.nebur97.git.gw2api.type.upgradecomponent.UpgradeCompType;
 public class UpgradeComponent extends Item
 {
     private List<UpgradeCompFlag> flags = new ArrayList<UpgradeCompFlag>();
-    private String		suffix;
-    private Infusion	      applicableInfusion;
+    private String suffix;
+    private Infusion applicableInfusion;
     
     /**
      * Set the upgrade'S type.

@@ -46,4 +46,10 @@ public enum TwoHanded implements WeaponType
     {
 	return false;
     }
+
+    @Override
+    public WEAPON getCategory()
+    {
+	return WEAPON.TWOHANDED;
+    }
 }

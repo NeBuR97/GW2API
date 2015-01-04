@@ -52,4 +52,10 @@ public enum OneHanded implements WeaponType
     {
 	return true;
     }
+
+    @Override
+    public WEAPON getCategory()
+    {
+	return WEAPON.ONEHANDED;
+    }
 }

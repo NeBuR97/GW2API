@@ -18,8 +18,8 @@ import de.nebur97.git.gw2api.type.weapon.WEAPON;
 public class Weapon extends Gear
 {
     
-    private int	minPow;
-    private int	maxPow;
+    private int minPow;
+    private int maxPow;
     private DamageType dType;
     
     public void setType(String type)
