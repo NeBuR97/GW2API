@@ -1,36 +1,65 @@
 package de.nebur97.git.gw2api.item;
 
-import de.nebur97.git.gw2api.enumerations.type.armor.ARMOR;
-import de.nebur97.git.gw2api.enumerations.type.armor.ARMOR.WeightClass;
+import de.nebur97.git.gw2api.type.armor.ArmorType;
+import de.nebur97.git.gw2api.type.armor.WeightClass;
 
-public class Armor extends Item {
+/**
+ * An object representing a piece of Armor.
+ * 
+ * @see de.nebur97.git.gw2api.type.armor.ARMOR Possible Armor types
+ * @see de.nebur97.git.gw2api.item.Item Item
+ * @author NeBuR97
+ **/
+public class Armor extends Gear
+{
+    private int	 def;
+    private WeightClass wClass;
+   
+    /**
+     * Gets the armor's defense value.
+     * 
+     * @return defense
+     */
+    public int getDefense()
+    {
+	return def;
+    }
 
-	private ARMOR type;
-	private int def;
-	private WeightClass wClass;
-	public int getDefense()
-	{
-		return def;
-	}
-	
-	@Override
-	public void setType(String type)
-	{
-		this.type = ARMOR.valueOf(type);
-	}
-	@Override
-	public ARMOR getType()
-	{
-		return type;
-	}
-	public WeightClass getWeightClass()
-	{
-		return wClass;
-	}
-	public void setDefense(int def) {
-		this.def = def;
-	}
-	public void setWeightClass(String wClass) {
-		this.wClass = ARMOR.WeightClass.valueOf(wClass);
-	}
+    /**
+     * Sets the armor's defense value.
+     * 
+     * @param def
+     */
+    public void setDefense(int def)
+    {
+	this.def = def;
+    }
+
+    /**
+     * Gets the armor's weight class.
+     * 
+     * @return wClass
+     * @see de.nebur97.git.gw2api.type.armor.WeightClass WeightClass
+     */
+    public WeightClass getWeightClass()
+    {
+	return wClass;
+    }
+
+    /**
+     * Sets the weight class.
+     * 
+     * @param wClass
+     * @see de.nebur97.git.gw2api.type.armor.WeightClass WeightClass
+     */
+    public void setWeightClass(String wClass)
+    {
+	this.wClass = WeightClass.valueOf(wClass.toUpperCase());
+    }
+
+    public void setType(String type)
+    {
+	setType(ArmorType.valueOf(type.toUpperCase()));
+    }
+
 }

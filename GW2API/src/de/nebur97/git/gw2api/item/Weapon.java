@@ -1,39 +1,82 @@
 package de.nebur97.git.gw2api.item;
 
-import de.nebur97.git.gw2api.enumerations.type.weapon.DAMAGETYPE;
-import de.nebur97.git.gw2api.enumerations.type.weapon.WEAPON;
+import de.nebur97.git.gw2api.type.weapon.DamageType;
+import de.nebur97.git.gw2api.type.weapon.WEAPON;
 
-public class Weapon extends Item {
+/**
+ * An object representing a weapon.<br>
+ * For possible types of weapons, see 
+ * <li>{@link de.nebur97.git.gw2api.type.weapon.Aquatic Aquatic}
+ * <li>{@link de.nebur97.git.gw2api.type.weapon.OffHand OffHand}
+ * <li>{@link de.nebur97.git.gw2api.type.weapon.OneHanded OneHanded}
+ * <li>{@link de.nebur97.git.gw2api.type.weapon.Other Other}
+ * <li>{@link de.nebur97.git.gw2api.type.weapon.TwoHanded TwoHanded}
+ * @author NeBuR97
+ *
+ */
+public class Weapon extends Gear
+{
 
-	private WEAPON type;
-	private int minPow;
-	private int maxPow;
-	private DAMAGETYPE dType;
-	
-	@Override
-	public WEAPON getType() {
-		return type;
-	}
-	@Override
-	public void setType(String type) {
-		this.type = WEAPON.valueOf(type);
-	}
-	public int getMinPow() {
-		return minPow;
-	}
-	public void setMinPow(int minPow) {
-		this.minPow = minPow;
-	}
-	public int getMaxPow() {
-		return maxPow;
-	}
-	public void setMaxPow(int maxPow) {
-		this.maxPow = maxPow;
-	}
-	public DAMAGETYPE getDamageType() {
-		return dType;
-	}
-	public void setDamageType(DAMAGETYPE dType) {
-		this.dType = dType;
-	}
+    private int	minPow;
+    private int	maxPow;
+    private DamageType dType;
+    public void setType(String type)
+    {
+	setType(WEAPON.getWeaponType(type));
+    }
+    /**
+     * Get the weapons minimum damage.
+     * @return minimum weapon power
+     */
+    public int getMinPower()
+    {
+	return minPow;
+    }
+
+    /**
+     * Set the minimum damage.
+     * @param minPow - the minimum power
+     */
+    public void setMinPower(int minPow)
+    {
+	this.minPow = minPow;
+    }
+
+    /**
+     * Get the maximum damage.
+     * @return maximum damage
+     */
+    public int getMaxPower()
+    {
+	return maxPow;
+    }
+
+    /**
+     * Set the maximum damage.
+     * @param maxPow - maximum power
+     */
+    public void setMaxPower(int maxPow)
+    {
+	this.maxPow = maxPow;
+    }
+
+    /**
+     * Get the damage type.
+     * @return damagetype
+     * @see de.nebur97.git.gw2api.type.weapon.DamageType DamageType
+     */
+    public DamageType getDamageType()
+    {
+	return dType;
+    }
+
+    /**
+     * Set the damage type.
+     * @param dType - the damage type
+     * @see de.nebur97.git.gw2api.type.weapon.DamageType DamageType
+     */
+    public void setDamageType(DamageType dType)
+    {
+	this.dType = dType;
+    }
 }
