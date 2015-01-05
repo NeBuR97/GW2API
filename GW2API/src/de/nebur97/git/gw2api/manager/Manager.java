@@ -3,6 +3,7 @@ package de.nebur97.git.gw2api.manager;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -15,6 +16,7 @@ public abstract class Manager<T>
     protected HashMap<Integer,T> entryIDs = new HashMap<Integer,T>();
     protected int threadCount = (int)Math.pow(2, Runtime.getRuntime().availableProcessors());
     protected Executor pool = Executors.newFixedThreadPool(threadCount);
+    protected int finishedTreads = 0;
     /**
      * Get an element via it's id. Returns null if no element is present (although the map may contain a null value, I believe recipes and items will never be null, thus making null a definitive return type).
      * @param id
@@ -73,12 +75,31 @@ public abstract class Manager<T>
     
     public void setThreadCount(int threads)
     {
-	threadCount = threads;
-	pool = Executors.newFixedThreadPool(threadCount);
+	if(isFinished())
+	{
+	    threadCount = threads;
+	}
     }
     
     public int getThreadCount()
     {
 	return threadCount;
+    }
+    
+    abstract public boolean isFinished();
+    
+    public synchronized void incrementFinishedThreads()
+    {
+	finishedTreads++;
+	System.out.println(finishedTreads + " finished threads.");
+	if(finishedTreads == threadCount)
+	{
+	    pool = null;
+	}
+    }
+    
+    public int getFinishedThreads()
+    {
+	return finishedTreads;
     }
 }

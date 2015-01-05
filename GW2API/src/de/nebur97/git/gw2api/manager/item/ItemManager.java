@@ -19,6 +19,7 @@ public class ItemManager extends Manager<Item>
     private int errors = 0;
     private int idsToLoad;
     private List<Integer> ids;
+    
     @Override
     public synchronized void add(Item i)
     {
@@ -35,6 +36,7 @@ public class ItemManager extends Manager<Item>
     @Override
     public void load(Collection<Integer> ids)
     {
+	finishedTreads = 0;
 	//remove duplicates
 	List<Integer> tmp = new ArrayList<Integer>();
 	for(int id : ids)
@@ -47,7 +49,7 @@ public class ItemManager extends Manager<Item>
 	this.ids = tmp;
 	tmp = null;
 	
-	idsToLoad = ids.size();
+	idsToLoad = this.ids.size();
 	//create a list for each thread
 	List<List<Integer>> sub = new ArrayList<List<Integer>>();
 	
@@ -57,24 +59,23 @@ public class ItemManager extends Manager<Item>
 	}
 	
 	int index = 0;
+	System.out.println(sub.size());
 	for(int id : ids)
 	{
-	    sub.get(index).add(id);
-	    index++;
-	    if(index >= getThreadCount())
+	    if(!isLoaded(id))
+	    {
+		 sub.get(index).add(id);
+		 index++;
+	    }
+	    if(index == getThreadCount())
 	    {
 		index = 0;
 	    }
 	}
 	
-	/*for(List<Integer> l : sub)
+	for(List<Integer> l : sub)
 	{
 	    pool.execute(new ItemLoader(this,l));
-	}*/
-	
-	for(int id : this.ids)
-	{
-	    pool.execute(new ItemLoader(this,id));
 	}
     }
     
@@ -83,9 +84,12 @@ public class ItemManager extends Manager<Item>
 	errors++;
     }
     
+    @Override
     public boolean isFinished()
     {
-	return entryIDs.size() == (idsToLoad-errors);
+	synchronized(entryIDs){
+	    return entryIDs.size() == (idsToLoad-errors);
+	}
     }
     
     public String getProgress()

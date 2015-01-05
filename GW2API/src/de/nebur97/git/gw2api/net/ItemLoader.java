@@ -1,9 +1,5 @@
 package de.nebur97.git.gw2api.net;
 
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.List;
 
@@ -39,6 +35,7 @@ public class ItemLoader extends Thread implements Runnable
     {
 	this.ids = ids;
 	cache = manager;
+	System.out.println("Created a new ItemLoader with "+ids.size()+" ids.");
     }
     
     public ItemLoader(ItemManager manager, int id)
@@ -50,7 +47,8 @@ public class ItemLoader extends Thread implements Runnable
     public void run()
     {
 	// Go through all ids.
-	//for(int id : ids) {
+	int c = 0;
+	for(int id : ids) {
 	    long start = System.currentTimeMillis();
 	    try {
 		parser = Json.createParser(new URL(ITEM_API_URL + id).openStream());
@@ -145,15 +143,19 @@ public class ItemLoader extends Thread implements Runnable
 			}
 		    }
 		}
+		c++;
+		System.out.println(this.getName()+" loaded item: "+c+"/"+ids.size()+" "+item.getID()+","+item.getName()+" in "+(System.currentTimeMillis()-start)+"ms");
+		cache.add(item);
 	    }
 	    catch(Exception e) {
-		System.err.println("Error at "+id);
+		c++;
+		System.err.println(c+" Error at "+id);
 		cache.incrementErrors();
-		return;
 	    }
-	    System.out.println("Loaded item: "+item.getID()+","+item.getName()+" in "+(System.currentTimeMillis()-start)+"ms");
-	    cache.add(item);
-	//}
+	    
+	}
+	cache.incrementFinishedThreads();
+	System.out.println(getName()+" is finished, total of "+ cache.getFinishedThreads()+" finished threads.");
     }
     
     private void basicArray(String name)
