@@ -75,7 +75,7 @@ public class ItemManager extends Manager<Item>
 	
 	for(List<Integer> l : sub)
 	{
-	    pool.execute(new ItemLoader(this,l));
+	    executeThread(new ItemLoader(this,l));
 	}
     }
     
