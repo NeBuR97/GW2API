@@ -101,7 +101,7 @@ public class Attribute
     public static Attribute createAttribute(String type, int modifier)
     {
 	try {
-	    return createAttribute(AttributeType.valueOf(type), modifier);
+	    return createAttribute(AttributeType.valueOf(type.toUpperCase()), modifier);
 	} catch(Exception e) {
 	    return null;
 	}
@@ -126,5 +126,11 @@ public class Attribute
     public static Attribute createAttribute(AttributeType type, int modifier)
     {
 	return (type != null ) ? new Attribute(type, modifier) : null;
+    }
+    
+    @Override
+    public String toString()
+    {
+	return "Attribute: Type:"+aT+",modifier:"+modifier;
     }
 }

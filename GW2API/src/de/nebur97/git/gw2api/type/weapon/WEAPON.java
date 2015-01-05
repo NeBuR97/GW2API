@@ -47,8 +47,9 @@ public enum WEAPON
      * @param type
      * @return a WeaponType
      */
-    public static WeaponType getWeaponType(String type) throws IllegalArgumentException
+    public static WeaponType getWeaponType(String t) throws IllegalArgumentException
     {
+	String type = t.toUpperCase();
 	// check if type is mentioned in Aquatic
 	try {
 	   return Aquatic.valueOf(type);

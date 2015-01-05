@@ -9,6 +9,12 @@ import de.nebur97.git.gw2api.type.Type;
  **/
 public class Bag extends Item
 {
+    public Bag(Item parent)
+    {
+	super(parent);
+	setItemType(Type.BAG);
+    }
+
     private int size;
     private boolean noSellSort;
     

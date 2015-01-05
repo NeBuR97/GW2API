@@ -10,6 +10,12 @@ import de.nebur97.git.gw2api.type.Type;
  */
 public class Tool extends Item
 {
+    public Tool(Item parent)
+    {
+	super(parent);
+	setItemType(Type.TOOL);
+    }
+
     private int charges;
     
     @Override

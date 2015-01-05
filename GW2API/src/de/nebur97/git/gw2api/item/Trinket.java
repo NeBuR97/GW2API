@@ -1,5 +1,6 @@
 package de.nebur97.git.gw2api.item;
 
+import de.nebur97.git.gw2api.type.Type;
 import de.nebur97.git.gw2api.type.trinket.TrinketType;
 
 /**
@@ -10,6 +11,12 @@ import de.nebur97.git.gw2api.type.trinket.TrinketType;
  */
 public class Trinket extends Gear
 {
+    public Trinket(Item parent)
+    {
+	super(parent);
+	setItemType(Type.TRINKET);
+    }
+
     /**
      * Set this trinket's type.
      * 
@@ -18,6 +25,12 @@ public class Trinket extends Gear
      */
     public void setType(String t)
     {
-	setType(TrinketType.valueOf(t.toUpperCase()));
+	try{
+	    setType(TrinketType.valueOf(t.toUpperCase()));
+	}catch(Exception e)
+	{
+	    e.printStackTrace();
+	}
+	
     }
 }

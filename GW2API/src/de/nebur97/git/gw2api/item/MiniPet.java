@@ -10,6 +10,12 @@ import de.nebur97.git.gw2api.type.Type;
  */
 public class MiniPet extends Item
 {
+    public MiniPet(Item parent)
+    {
+	super(parent);
+	setItemType(Type.MINIPET);
+    }
+
     @Override
     public Type getType()
     {

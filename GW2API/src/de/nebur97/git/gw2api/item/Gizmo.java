@@ -1,5 +1,6 @@
 package de.nebur97.git.gw2api.item;
 
+import de.nebur97.git.gw2api.type.Type;
 import de.nebur97.git.gw2api.type.gizmo.GizmoType;
 
 /**
@@ -10,6 +11,12 @@ import de.nebur97.git.gw2api.type.gizmo.GizmoType;
  */
 public class Gizmo extends Item
 {
+    public Gizmo(Item parent)
+    {
+	super(parent);
+	setItemType(Type.GIZMO);
+    }
+
     private GizmoType type;
     
     @Override
@@ -24,7 +31,13 @@ public class Gizmo extends Item
      */
     public void setType(String s)
     {
-	setType(GizmoType.valueOf(s.toUpperCase()));
+	try{
+	    setType(GizmoType.valueOf(s.toUpperCase()));
+	}catch(Exception e)
+	{
+	    e.printStackTrace();
+	}
+	
     }
     
 }

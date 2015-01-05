@@ -15,6 +15,12 @@ public class Back extends Gear
      * This class is just for organization.
      */
     
+    public Back(Item parent)
+    {
+	super(parent);
+	setItemType(Type.BACK);
+    }
+
     @Override
     public Type getType()
     {

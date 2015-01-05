@@ -1,5 +1,6 @@
 package de.nebur97.git.gw2api.item;
 
+import de.nebur97.git.gw2api.type.Type;
 import de.nebur97.git.gw2api.type.container.ContainerType;
 
 /**
@@ -10,6 +11,12 @@ import de.nebur97.git.gw2api.type.container.ContainerType;
  */
 public class Container extends Item
 {
+    public Container(Item parent)
+    {
+	super(parent);
+	setItemType(Type.CONTAINER);
+    }
+
     /**
      * Set this container's type.
      * 
@@ -17,6 +24,12 @@ public class Container extends Item
      */
     public void setType(String ct)
     {
-	setType(ContainerType.valueOf(ct.toUpperCase()));
+	try{
+	    setType(ContainerType.valueOf(ct.toUpperCase()));
+	}catch(Exception e)
+	{
+	    e.printStackTrace();
+	}
+	
     }
 }

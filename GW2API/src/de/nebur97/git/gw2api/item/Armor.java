@@ -1,5 +1,6 @@
 package de.nebur97.git.gw2api.item;
 
+import de.nebur97.git.gw2api.type.Type;
 import de.nebur97.git.gw2api.type.armor.ArmorType;
 import de.nebur97.git.gw2api.type.armor.WeightClass;
 
@@ -12,6 +13,12 @@ import de.nebur97.git.gw2api.type.armor.WeightClass;
  **/
 public class Armor extends Gear
 {
+    public Armor(Item parent)
+    {
+	super(parent);
+	setItemType(Type.ARMOR);
+    }
+
     private int def;
     private WeightClass wClass;
     
@@ -63,7 +70,31 @@ public class Armor extends Gear
      */
     public void setType(String type)
     {
-	setType(ArmorType.valueOf(type.toUpperCase()));
+	try{
+	    setType(ArmorType.valueOf(type.toUpperCase()));
+	} catch(Exception e)
+	{
+	    e.printStackTrace();
+	}
+	
     }
     
+    @Override
+    public void setProperty(String prop, Object value)
+    {
+	switch(prop)
+	{
+	case "defense":
+	    def = (Integer)value;
+	    break;
+	case "weight_class":
+	    setWeightClass(value.toString());
+	    break;
+	default: super.setProperty(prop, value);
+	}
+    }
+    protected String name()
+    {
+	return "Armor";
+    }
 }

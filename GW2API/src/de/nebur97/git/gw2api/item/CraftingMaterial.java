@@ -11,6 +11,11 @@ import de.nebur97.git.gw2api.type.Type;
 public class CraftingMaterial extends Item
 {
     
+    public CraftingMaterial(Item parent)
+    {
+	super(parent);
+    }
+
     @Override
     public Type getType()
     {

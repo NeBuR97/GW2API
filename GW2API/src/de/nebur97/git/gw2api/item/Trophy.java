@@ -10,6 +10,12 @@ import de.nebur97.git.gw2api.type.Type;
  */
 public class Trophy extends Item
 {
+    public Trophy(Item parent)
+    {
+	super(parent);
+	setItemType(Type.TROPHY);
+    }
+
     @Override
     public Type getType()
     {

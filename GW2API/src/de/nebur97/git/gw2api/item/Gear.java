@@ -6,6 +6,7 @@ import java.util.List;
 import de.nebur97.git.gw2api.item.attributes.Attribute;
 import de.nebur97.git.gw2api.item.infusions.Infusable;
 import de.nebur97.git.gw2api.item.infusions.Infusion;
+import de.nebur97.git.gw2api.type.armor.ArmorType;
 
 /**
  * Wearable items (Armor and such).
@@ -15,8 +16,13 @@ import de.nebur97.git.gw2api.item.infusions.Infusion;
  */
 public class Gear extends Item implements Infusable
 {
+    public Gear(Item parent)
+    {
+	super(parent);
+    }
+
     private List<Attribute> stats = new ArrayList<Attribute>();
-    private Infusion iF = Infusion.NONE;
+    private List<Infusion> iF = new ArrayList<Infusion>();
     private int suffixID;
     
     /**
@@ -62,25 +68,44 @@ public class Gear extends Item implements Infusable
     }
     
     @Override
-    public void setInfusionSlot(Infusion inf)
+    public void setProperty(String prop, Object value)
     {
-	iF = inf;
+	switch(prop)
+	{
+	case "infusion_slots":
+	    addInfusionSlot(value.toString());
+	    break;
+	case "attribute":
+	    addAttribute((Attribute)value);
+	    break;
+	case "suffix_item_id":
+	    suffixID = (Integer)value;
+	    break;
+	default: super.setProperty(prop, value);
+	}
+	    
     }
-    
+
     @Override
-    public void setInfusionSlot(String infusion)
+    public void addInfusionSlot(Infusion inf)
     {
-	try {
-	    setInfusionSlot(Infusion.valueOf(infusion.toUpperCase()));
-	} catch(Exception e) {
-	    e.printStackTrace();
-	    setInfusionSlot(Infusion.AGONY);
+	iF.add(inf);
+    }
+
+    @Override
+    public void addInfusionSlot(String inf)
+    {
+	try{
+	    iF.add(Infusion.valueOf(inf));
+	}catch(Exception e)
+	{
+	    iF.add(Infusion.NONE);
 	}
     }
-    
+
     @Override
-    public Infusion getInfusionSlot()
+    public Infusion[] getInfusionSlots()
     {
-	return iF;
+	return iF.toArray(new Infusion[iF.size()]);
     }
 }

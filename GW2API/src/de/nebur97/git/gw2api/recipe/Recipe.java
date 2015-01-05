@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import de.nebur97.git.gw2api.manager.EntryWithID;
 import de.nebur97.git.gw2api.recipe.disciplines.Discipline;
 import de.nebur97.git.gw2api.recipe.flags.RecipeFlag;
 import de.nebur97.git.gw2api.type.Type;
@@ -17,7 +18,7 @@ import de.nebur97.git.gw2api.type.refinement.RefinementType;
  * 
  * @author NeBuR97
  **/
-public class Recipe
+public class Recipe implements EntryWithID
 {
     private int id;
     private Object type;
@@ -34,7 +35,8 @@ public class Recipe
      * Get this recipe's id.
      * @return the id
      */
-    public int getRecipeID()
+    @Override
+    public int getID()
     {
 	return id;
     }
@@ -43,7 +45,7 @@ public class Recipe
      * Set the id.
      * @param id
      */
-    public void setRecipeID(int id)
+    public void setID(int id)
     {
 	this.id = id;
     }

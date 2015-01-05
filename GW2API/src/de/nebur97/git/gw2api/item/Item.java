@@ -1,5 +1,8 @@
 package de.nebur97.git.gw2api.item;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +10,9 @@ import java.util.List;
 import de.nebur97.git.gw2api.item.flags.Flag;
 import de.nebur97.git.gw2api.item.gametypes.GameType;
 import de.nebur97.git.gw2api.item.restrictions.Restriction;
+import de.nebur97.git.gw2api.manager.EntryWithID;
 import de.nebur97.git.gw2api.rarity.Rarity;
+import de.nebur97.git.gw2api.type.Type;
 
 /**
  * The basic item implementation.<br>
@@ -21,11 +26,13 @@ import de.nebur97.git.gw2api.rarity.Rarity;
  * 
  * @author NeBuR97
  **/
-public class Item
+public class Item implements EntryWithID
 {
+    //not to be confused with type! This is for identification purposes only.
+    private Type itemType;
     private int id;
     private String name;
-    private Object type;
+    private Object type = "No type specified";
     private URL icon;
     private String desc;
     private Rarity rare;
@@ -35,11 +42,29 @@ public class Item
     private List<Flag> flags = new ArrayList<Flag>();
     private List<Restriction> restrictions = new ArrayList<Restriction>();
     
+    public Item(Item parent)
+    {
+	id = parent.id;
+	name = parent.name;
+	type = parent.type;
+	icon = parent.icon;
+	desc = parent.desc;
+	rare = parent.rare;
+	level = parent.level;
+	vendorValue = parent.vendorValue;
+	gameTypes = parent.gameTypes;
+	flags = parent.flags;
+	restrictions = parent.restrictions;
+    }
+    public Item()
+    {
+    }
     /**
      * Gets the item's id.
      * 
      * @return id
      */
+    @Override
     public int getID()
     {
 	return id;
@@ -313,7 +338,139 @@ public class Item
     @Override
     public String toString()
     {
-	return "{id=" + id + "name=" + name + "type=" + type + "icon=" + icon
-		+ "description=" + desc + "rarity=" + rare + "}";
+	StringBuilder b = new StringBuilder();
+	for(Method m : this.getClass().getMethods())
+	{
+	    if(m.getName().contains("get"))
+	    {
+		try {
+		    Object val = m.invoke(this);
+		    if(val.)
+	            b.append(m.getName().replace("get", "") + ":" + m.invoke(this)+"\n");
+                }
+                catch(IllegalAccessException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+                }
+                catch(IllegalArgumentException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+                }
+                catch(InvocationTargetException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+                }
+	    }
+	}
+	return b.toString();
     }
+    
+    /**
+     * Possible properties:
+     * <li>name
+     * <li>type
+     * <li>level
+     * <li>rarity
+     * <li>vendor_value
+     * <li>default_skin<i>(not implemented)</i>
+     * <li>game_types
+     * <li>flags
+     * <li>restrictions
+     * <li>id
+     * <li>icon
+     * @param prop
+     * @param value
+     */
+    public void setProperty(String prop, Object value)
+    {
+	switch(prop)
+	{
+	case "name":
+	    name = value.toString();
+	    break;
+	case "description":
+	    desc = value.toString();
+	    break;
+	case "type":
+	    setType(value.toString());
+	    break;
+	case "level":
+	    level = (Integer)value;
+	    break;
+	case "rarity":
+	    rare = Rarity.valueOf(value.toString().toUpperCase());
+	    break;
+	case "vendor_value":
+	    vendorValue = (Integer)value;
+	    break;
+	case "game_types":
+	    addGameType(value.toString());
+	    break;
+	case "flags":
+	    addFlag(value.toString());
+	    break;
+	case "restrictions":
+	    addRestriction(value.toString());
+	    break;
+	case "id":
+	    id = (Integer)value;
+	    break;
+	case "icon":
+	    try {
+	        icon = new URL(value.toString());
+            }
+            catch(MalformedURLException e) {
+	        e.printStackTrace();
+            }
+	    break;
+	}
+    }
+    
+    public Item createSubItem(String type)
+    {
+	switch(type)
+	{
+	case "Armor":
+	    return new Armor(this);
+	case "Back":
+	    return new Back(this);
+	case "Bag":
+	    return new Bag(this);
+	case "Consumable":
+	    return new Consumable(this);
+	case "CraftingMaterial":
+	    return new CraftingMaterial(this);
+	case "Gathering":
+	    return new Gathering(this);
+	case "Gizmo":
+	    return new Gizmo(this);
+	case "MiniPet":
+	    return new MiniPet(this);
+	case "Tool":
+	    return new Tool(this);
+	case "Trait":
+	    return new Trait(this);
+	case "Trinket":
+	    return new Trinket(this);
+	case "Trophy":
+	    return new Trophy(this);
+	case "UpgradeComponent":
+	    return new UpgradeComponent(this);
+	case "Weapon":
+	    return new Weapon(this);
+	}
+	return this;
+    }
+    
+    public Type getItemType()
+    {
+        return itemType;
+    }
+    
+    protected void setItemType(Type itemType)
+    {
+        this.itemType = itemType;
+    }
+
+
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.nebur97.git.gw2api.item.infusions.Infusion;
+import de.nebur97.git.gw2api.type.Type;
 import de.nebur97.git.gw2api.type.upgradecomponent.UpgradeCompFlag;
 import de.nebur97.git.gw2api.type.upgradecomponent.UpgradeCompType;
 
@@ -13,6 +14,14 @@ public class UpgradeComponent extends Item
     private String suffix;
     private Infusion applicableInfusion;
     
+    
+    public UpgradeComponent(Item parent)
+    {
+	super(parent);
+	setItemType(Type.UPGRADECOMPONENT);
+    }
+
+    
     /**
      * Set the upgrade'S type.
      * 
@@ -20,7 +29,12 @@ public class UpgradeComponent extends Item
      */
     public void setType(String t)
     {
-	setType(UpgradeCompType.valueOf(t.toUpperCase()));
+	try{
+	    setType(UpgradeCompType.valueOf(t.toUpperCase()));
+	}catch(Exception e)
+	{
+	    e.printStackTrace();
+	}
     }
     
     /**

@@ -14,9 +14,9 @@ public interface Infusable
      * @param inf
      * @see Infusion
      */
-    public void setInfusionSlot(Infusion inf);
+    public void addInfusionSlot(Infusion inf);
     
-    public void setInfusionSlot(String inf);
+    public void addInfusionSlot(String inf);
     
     /**
      * Get the item's infusion slot.
@@ -24,5 +24,5 @@ public interface Infusable
      * @return The infusion slot
      * @see Infusion
      */
-    public Infusion getInfusionSlot();
+    public Infusion[] getInfusionSlots();
 }

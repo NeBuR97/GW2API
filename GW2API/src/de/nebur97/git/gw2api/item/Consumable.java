@@ -1,5 +1,6 @@
 package de.nebur97.git.gw2api.item;
 
+import de.nebur97.git.gw2api.type.Type;
 import de.nebur97.git.gw2api.type.consumable.ConsumableType;
 import de.nebur97.git.gw2api.type.consumable.UnlockType;
 
@@ -10,6 +11,12 @@ import de.nebur97.git.gw2api.type.consumable.UnlockType;
  **/
 public class Consumable extends Item
 {
+    public Consumable(Item parent)
+    {
+	super(parent);
+	setItemType(Type.CONSUMABLE);
+    }
+
     private long durMS;
     private int colorID;
     private int recipeID;

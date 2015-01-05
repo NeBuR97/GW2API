@@ -10,6 +10,12 @@ import de.nebur97.git.gw2api.type.Type;
  */
 public class Trait extends Item
 {
+    public Trait(Item parent)
+    {
+	super(parent);
+	setItemType(Type.TRAIT);
+    }
+
     @Override
     public Type getType()
     {

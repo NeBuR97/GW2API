@@ -15,57 +15,57 @@ public enum Flag
     /**
      * Account bound on use.
      */
-    ACCOUNT_BIND_ON_USE,
+    ACCOUNTBINDONUSE,
     
     /**
      * Account bound on acquire.
      */
-    ACCOUNT_BOUND,
+    ACCOUNTBOUND,
     
     /**
      * Hide the suffix of the upgrade component.
      */
-    HIDE_SUFFIX,
+    HIDESUFFIX,
     
     /**
      * <i>No wiki information on this one.</i>
      */
-    MONSTER_ONLY,
+    MONSTERONLY,
     
     /**
      * Not usable in the Mystic Forge.
      */
-    NO_MYSTIC_FORGE,
+    NOMYSTICFORGE,
     
     /**
      * Not salvageable.
      */
-    NO_SALVAGE,
+    NOSALVAGE,
     
     /**
      * Not sellable.
      */
-    NO_SELL,
+    NOSELL,
     
     /**
      * Not upgradeable.
      */
-    NOT_UPGRADABLE,
+    NOTUPGRADEABLE,
     
     /**
      * Not available underwater.
      */
-    NO_UNDERWATER,
+    NOUNDERWATER,
     
     /**
      * Soulbound on acquire.
      */
-    SOUL_BIND_ON_ACQUIRE,
+    SOULBINDONACQUIRE,
     
     /**
      * Soulbound on use.
      */
-    SOUL_BIND_ON_USE,
+    SOULBINDONUSE,
     
     /**
      * Unique.
