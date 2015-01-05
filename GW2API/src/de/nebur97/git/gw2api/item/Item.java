@@ -345,8 +345,10 @@ public class Item implements EntryWithID
 	    {
 		try {
 		    Object val = m.invoke(this);
-		    if(val.)
-	            b.append(m.getName().replace("get", "") + ":" + m.invoke(this)+"\n");
+		    if(val != null && !val.toString().contains("Class"))
+		    {
+			b.append(m.getName().replace("get", "") + ":" + m.invoke(this)+"\n");
+		    }
                 }
                 catch(IllegalAccessException e) {
 	            // TODO Auto-generated catch block
