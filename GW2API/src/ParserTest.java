@@ -25,7 +25,7 @@ public class ParserTest
 	    if(p.next() == Event.VALUE_NUMBER) {
 		ids.add(p.getInt());
 		System.out.println(p.getInt());
-		if(ids.size() == 1000) {
+		if(ids.size() == 5) {
 		    p.close();
 		    break;
 		}
