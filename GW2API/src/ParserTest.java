@@ -17,7 +17,6 @@ public class ParserTest
     public static void main(String[] args) throws InterruptedException, MalformedURLException, IOException
     {
 	long start = System.currentTimeMillis();
-	System.out.println("u wot");
 	JsonParser p = Json.createParser(new URL("https://api.guildwars2.com/v1/items.json").openStream());
 	List<Integer> ids = new ArrayList<Integer>();
 	
