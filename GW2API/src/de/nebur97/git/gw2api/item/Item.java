@@ -339,13 +339,22 @@ public class Item implements EntryWithID
     public String toString()
     {
 	StringBuilder b = new StringBuilder();
+	b.append("{");
 	for(Method m : this.getClass().getMethods())
 	{
 	    if(m.getName().contains("get"))
 	    {
 		try {
 		    Object val = m.invoke(this);
-		    if(val != null && !val.toString().contains("Class"))
+		    if(val instanceof Object[])
+		    {
+			b.append(m.getName().replace("get", "")+"{");
+			for(Object o : (Object[])val)
+			{
+			    b.append(o+",");
+			}
+			b.append("}\n");
+		    } else if(val != null && !m.getName().contains("Class"))
 		    {
 			b.append(m.getName().replace("get", "") + ":" + m.invoke(this)+"\n");
 		    }
@@ -364,6 +373,7 @@ public class Item implements EntryWithID
                 }
 	    }
 	}
+	b.append("}");
 	return b.toString();
     }
     
