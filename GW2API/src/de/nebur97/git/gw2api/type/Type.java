@@ -376,25 +376,6 @@ public enum Type
     public static Object getType(String type)
     {
 	String s = type.toUpperCase();
-	/*Type t = (ARMOR.getSubType(s) != null) ? ARMOR : NONE;
-	t = (BACK.name().equals(t)) ? BACK : NONE;
-	t = (BAG.name().equals(t)) ? BAG : NONE;
-    	t = (CONSUMABLE.getSubType(s) != null) ? CONSUMABLE : NONE;
-    	t = (CONTAINER.getSubType(s) != null) ? CONTAINER : NONE;
-    	t = (CRAFTINGMATERIAL.getSubType(s) != null) ? CRAFTINGMATERIAL : NONE;
-    	t = (GATHERING.getSubType(s) != null) ? GATHERING : NONE;
-    	t = (GIZMO.getSubType(s) != null) ? GIZMO : NONE;
-    	t = (MINIPET.name().equals(t)) ? MINIPET : NONE;
-    	t = (TOOL.name().equals(t)) ? TOOL : NONE;
-    	t = (TRAIT.name().equals(t)) ? TRAIT : NONE;
-    	t = (TRINKET.getSubType(s) != null) ? TRINKET : NONE;
-    	t = (TROPHY.name().equals(t)) ? TROPHY : NONE;
-    	t = (WEAPON.getSubType(s) != null) ? WEAPON : NONE;
-    	t = (DYE.name().equals(t)) ? DYE : NONE;
-    	t = (POTION.name().equals(t)) ? POTION : NONE;
-    	t = (BULK.name().equals(t)) ? BULK : NONE;
-	return t;*/
-	
 	try{
 		return Type.valueOf(s);
 	}catch(Exception e )
