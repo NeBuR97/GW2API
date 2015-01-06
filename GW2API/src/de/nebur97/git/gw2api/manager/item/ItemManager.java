@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorCompletionService;
-import java.util.concurrent.Executors;
-
 import de.nebur97.git.gw2api.item.Item;
 import de.nebur97.git.gw2api.manager.Manager;
 import de.nebur97.git.gw2api.net.ItemLoader;
@@ -53,7 +49,8 @@ public class ItemManager extends Manager<Item>
 	//create a list for each thread
 	List<List<Integer>> sub = new ArrayList<List<Integer>>();
 	
-	for(int a = 0; a < getThreadCount(); a++)
+	int neededThreads = (idsToLoad < threadCount) ? idsToLoad : threadCount;
+	for(int a = 0; a < neededThreads; a++)
 	{
 	    sub.add(new ArrayList<Integer>());
 	}
@@ -67,7 +64,7 @@ public class ItemManager extends Manager<Item>
 		 sub.get(index).add(id);
 		 index++;
 	    }
-	    if(index == getThreadCount())
+	    if(index == neededThreads)
 	    {
 		index = 0;
 	    }
