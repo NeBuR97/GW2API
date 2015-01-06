@@ -13,10 +13,10 @@ public enum ContainerType
     /**
      * For some presents and most dye kits,
      */
-    GIFT_BOX,
+    GIFTBOX,
     
     /**
      * For containers that have their own UI when opening (Black Lion Chest).
      */
-    OPEN_UI;
+    OPENUI;
 }

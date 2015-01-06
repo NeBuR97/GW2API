@@ -10,13 +10,15 @@ import javax.json.stream.JsonParser.Event;
 
 import de.nebur97.git.gw2api.item.Item;
 import de.nebur97.git.gw2api.manager.item.ItemManager;
+import de.nebur97.git.gw2api.manager.recipe.RecipeManager;
+import de.nebur97.git.gw2api.recipe.Recipe;
 
 public class ParserTest
 {
     
     public static void main(String[] args) throws InterruptedException, MalformedURLException, IOException
     {
-	long start = System.currentTimeMillis();
+	/*long start = System.currentTimeMillis();
 	JsonParser p = Json.createParser(new URL("https://api.guildwars2.com/v1/items.json").openStream());
 	List<Integer> ids = new ArrayList<Integer>();
 	
@@ -42,7 +44,52 @@ public class ParserTest
 	for(Item i : man.getEntryList())
 	{
 	    System.out.println(i);
-	}
+	}*/
+    	
+    	/*JsonParser r = Json.createParser(new URL("https://api.guildwars2.com/v2/recipes/7319").openStream());
+    	while(r.hasNext())
+    	{
+    		Event e = r.next();
+    		if(e == Event.KEY_NAME || e == Event.VALUE_STRING)
+    		{
+    			System.out.println(e + ":" + r.getString());
+    		} else if(e == Event.VALUE_NUMBER)
+    		{
+    			System.out.println(e + ":" + r.getInt());
+    		} else {
+    			System.out.println(e);
+    		}
+    	}*/
+    	
+    	JsonParser r = Json.createParser(new URL("https://api.guildwars2.com/v1/recipes.json").openStream());
+    	List<Integer> ids = new ArrayList<Integer>();
+    	
+    	while(r.hasNext())
+    	{
+    		if(r.next() == Event.VALUE_NUMBER)
+    		{
+    			ids.add(r.getInt());
+    			if(ids.size() == 100)
+    			{
+    				break;
+    			}
+    		}
+    	}
+    	
+    	long start = System.currentTimeMillis();
+    	RecipeManager man = new RecipeManager();
+    	man.load(ids);
+    	
+    	while(!man.isFinished())
+    	{
+    		
+    	}
+    	System.out.println("Loaded "+man.getEntryList().size()+" in "+ (System.currentTimeMillis() - start)+"ms");
+
+    	for(Recipe re : man.getEntryList())
+    	{
+    		System.out.println(re);
+    	}
     }
     
 }

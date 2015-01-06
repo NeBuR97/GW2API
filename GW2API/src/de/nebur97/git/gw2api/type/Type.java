@@ -41,7 +41,7 @@ public enum Type
 		return ArmorType.valueOf(type);
 	    }catch(Exception e)
 	    {
-		System.err.println(type+" is not a valid ArmorType!");
+		//System.err.println(type+" is not a valid ArmorType!");
 		return null;
 	    }
 	}
@@ -56,7 +56,11 @@ public enum Type
 	@Override
 	public Type getSubType(String type)
 	{
-	    return this;
+		if(type.equals("BACK"))
+		{
+			return this;
+		}
+		return null;
 	}
     },
     
@@ -69,7 +73,11 @@ public enum Type
 	@Override
 	public Type getSubType(String type)
 	{
-	    return this;
+		if(type.equals("BAG"))
+		{
+			return this;
+		}
+		return null;
 	}
     },
     
@@ -89,7 +97,7 @@ public enum Type
 		return ConsumableType.valueOf(type);
 	    }catch(Exception e)
 	    {
-		System.err.println(type+" is not a valid ConsumableType!");
+		//System.err.println(type+" is not a valid ConsumableType!");
 		return null;
 	    }
 	}
@@ -108,7 +116,7 @@ public enum Type
 		return ContainerType.valueOf(type);
 	    }catch(Exception e)
 	    {
-		System.err.println(type+" is not a valid ContainerType!");
+		//System.err.println(type+" is not a valid ContainerType!");
 		return null;
 	    }
 	}
@@ -127,7 +135,7 @@ public enum Type
 		return CraftingMaterialType.valueOf(type);
 	    }catch(Exception e)
 	    {
-		System.err.println(type+" is not a valid CraftingMaterialType!");
+		//System.err.println(type+" is not a valid CraftingMaterialType!");
 		return null;
 	    }
 	}
@@ -146,7 +154,7 @@ public enum Type
 		return GatheringType.valueOf(type);
 	    }catch(Exception e)
 	    {
-		System.err.println(type+" is not a valid GatheringType!");
+		//System.err.println(type+" is not a valid GatheringType!");
 		return null;
 	    }
 	}
@@ -165,7 +173,7 @@ public enum Type
 		return GizmoType.valueOf(type);
 	    }catch(Exception e)
 	    {
-		System.err.println(type+" is not a valid GizmoType!");
+		//System.err.println(type+" is not a valid GizmoType!");
 		return null;
 	    }
 	}
@@ -180,7 +188,11 @@ public enum Type
 	@Override
 	public Type getSubType(String type)
 	{
-	    return this;
+		if(type.equals("MINIPET"))
+		{
+			return this;
+		}
+		return null;
 	}
     },
     
@@ -193,7 +205,11 @@ public enum Type
 	@Override
 	public Type getSubType(String type)
 	{
-	    return this;
+		if(type.equals("TOOL"))
+		{
+			return this;
+		}
+		return null;
 	}
     },
     
@@ -206,7 +222,11 @@ public enum Type
 	@Override
 	public Type getSubType(String type)
 	{
-	    return this;
+		if(type.equals("TRAIT"))
+		{
+			return this;
+		}
+		return null;
 	}
     },
     
@@ -224,7 +244,7 @@ public enum Type
 		return TrinketType.valueOf(type);
 	    }catch(Exception e)
 	    {
-		System.err.println(type+" is not a valid TrinketType!");
+		//System.err.println(type+" is not a valid TrinketType!");
 		return null;
 	    }
 	}
@@ -239,7 +259,11 @@ public enum Type
 	@Override
 	public Type getSubType(String type)
 	{
-	    return this;
+		if(type.equals("TROPHY"))
+		{
+			return this;
+		}
+		return null;
 	}
     },
     
@@ -256,7 +280,7 @@ public enum Type
 		return UpgradeCompType.valueOf(type);
 	    }catch(Exception e)
 	    {
-		System.err.println(type+" is not a valid UpgradeCompType!");
+		//System.err.println(type+" is not a valid UpgradeCompType!");
 		return null;
 	    }
 	}
@@ -276,7 +300,7 @@ public enum Type
 		return de.nebur97.git.gw2api.type.weapon.WEAPON.getWeaponType(type);
 	    }catch(Exception e)
 	    {
-		System.err.println(e.getMessage());
+		//System.err.println(e.getMessage());
 		return null;
 	    }
 	}
@@ -289,7 +313,11 @@ public enum Type
 	@Override
 	public Type getSubType(String type)
 	{
-	    return this;
+		if(type.equals("NONE"))
+		{
+			return this;
+		}
+		return null;
 	}
     },
     
@@ -300,7 +328,11 @@ public enum Type
 	@Override
 	public Type getSubType(String type)
 	{
-	    return this;
+		if(type.equals("DYE"))
+		{
+			return this;
+		}
+		return null;
 	}
     },
     
@@ -311,7 +343,11 @@ public enum Type
 	@Override
 	public Type getSubType(String type)
 	{
-	    return this;
+		if(type.equals("POTION"))
+		{
+			return this;
+		}
+		return null;
 	}
     },
     
@@ -322,7 +358,11 @@ public enum Type
 	@Override
 	public Type getSubType(String type)
 	{
-	    return this;
+		if(type.equals("BULK"))
+		{
+			return this;
+		}
+		return null;
 	}
     };
     
@@ -333,10 +373,10 @@ public enum Type
      * @param type
      * @return
      */
-    public static Type getSuperType(String type)
+    public static Object getType(String type)
     {
 	String s = type.toUpperCase();
-	Type t = (ARMOR.getSubType(s) != null) ? ARMOR : NONE;
+	/*Type t = (ARMOR.getSubType(s) != null) ? ARMOR : NONE;
 	t = (BACK.name().equals(t)) ? BACK : NONE;
 	t = (BAG.name().equals(t)) ? BAG : NONE;
     	t = (CONSUMABLE.getSubType(s) != null) ? CONSUMABLE : NONE;
@@ -353,6 +393,24 @@ public enum Type
     	t = (DYE.name().equals(t)) ? DYE : NONE;
     	t = (POTION.name().equals(t)) ? POTION : NONE;
     	t = (BULK.name().equals(t)) ? BULK : NONE;
-	return t;
+	return t;*/
+	
+	try{
+		return Type.valueOf(s);
+	}catch(Exception e )
+	{
+		//0 = Type, 1 = Subtype;
+		Object types[] = new Object[2];
+		for(Type t : Type.class.getEnumConstants())
+		{
+			types[0] = t;
+			if((types[1] = t.getSubType(s))!= null)
+			{
+				return types;
+			}
+		}
+		return NONE;
+	}
+	
     }
 }

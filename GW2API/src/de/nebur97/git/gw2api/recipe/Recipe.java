@@ -75,7 +75,7 @@ public class Recipe implements EntryWithID
      */
     public void setType(String s)
     {
-	Object t = Type.getSuperType(s);
+	Object t = Type.getType(s);
 	if(t == Type.NONE)
 	{
 	   try{
@@ -84,7 +84,7 @@ public class Recipe implements EntryWithID
 	       return;
 	   }catch(Exception e)
 	   {
-	       e.printStackTrace();
+	       //System.err.println(s + " is not a valid FoodType!");
 	   }
 	   
 	   try{
@@ -93,7 +93,7 @@ public class Recipe implements EntryWithID
 	       return;
 	   }catch(Exception e)
 	   {
-	       e.printStackTrace();
+		   //System.err.println(s + " is not a valid CraftingMaterialType!");
 	   }
 	   
 	   try{
@@ -102,11 +102,15 @@ public class Recipe implements EntryWithID
 	       return;
 	   }catch(Exception e)
 	   {
-	       e.printStackTrace();
+		   //System.err.println(s + " is not a valid RefinementType!");
 	   }
 	} else {
-	    t = ((Type)t).getSubType(s);
-	    type = t;
+		if(t instanceof Object[])
+		{
+			type = ((Object[])t)[1];
+		} else {
+			type = t;
+		}
 	}
     }
     
@@ -200,6 +204,15 @@ public class Recipe implements EntryWithID
         this.flag = flag;
     }
     
+    public void setRecipeFlag(String flag)
+    {
+    	try{
+    		this.flag = RecipeFlag.valueOf(flag.toUpperCase());
+    	}catch(Exception e)
+    	{
+    		e.printStackTrace();
+    	}
+    }
     /**
      * Adds a discipline
      * @param d
@@ -244,7 +257,75 @@ public class Recipe implements EntryWithID
      */
     public Integer[] getIngredientIDs()
     {
-	Set<Integer> keys= ingredients.keySet();
-	return keys.toArray(new Integer[keys.size()]);
+    	Set<Integer> keys= ingredients.keySet();
+    	return keys.toArray(new Integer[keys.size()]);
+    }
+    
+    public int getIngredientCount(int id)
+    {
+    	return ingredients.get(id);
+    }
+    /**
+     * <li>id
+     * <li>type
+     * <li>output_item_id
+     * <li>output_item_count
+     * <li>min_rating
+     * <li>time_to_craft_ms
+     * <li>disciplines
+     * <li>flags
+     * <li>ingredients <i>an int array, where 0 = id and 1 = count</i>
+     * @param prop
+     * @param value
+     */
+    public void setProperty(String prop, Object value)
+    {
+    	switch(prop)
+    	{
+    	case "id":
+    		id = (int)value;
+    		break;
+    	case "type":
+    		setType(value.toString());
+    		break;
+    	case "output_item_id":
+    		outputItemID = (int)value;
+    		break;
+    	case "output_item_count":
+    		outputItemCount = (int)value;
+    		break;
+    	case "min_rating":
+    		minRating = (int)value;
+    	case "time_to_craft_ms":
+    		timeToCraftMs = (int)value;
+    		break;
+    	case "disciplines":
+    		addDiscipline(value.toString());
+    		break;
+    	case "flags":
+    		setRecipeFlag(value.toString());
+    		break;
+    	case "ingredients":
+    		int[] ing = (int[])value;
+    		addIngredient(ing[0], ing[1]);
+    		break;
+    	}
+    }
+    
+    @Override
+    public String toString(){
+    	StringBuilder b = new StringBuilder();
+    	b.append("{id:" + id + ",\ntype:"+type+",\noutput_item_id:"+outputItemID+",\noutput_item_count:"+outputItemCount+",\ntime_to_craft_ms:"+timeToCraftMs+",\ndisciplines:{");
+    	for(Discipline d : disciplines)
+    	{
+    		b.append(d+",");
+    	}
+    	b.append("},\nmin_rating:"+minRating+",\ningredients:{");
+    	for(int id : ingredients.keySet())
+    	{
+    		b.append("{id:"+id+",count:"+ingredients.get(id)+"},");
+    	}
+    	b.append("},\nflag:"+flag+"}");
+    	return b.toString();
     }
 }

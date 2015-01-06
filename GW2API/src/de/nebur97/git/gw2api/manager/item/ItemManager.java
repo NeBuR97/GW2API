@@ -30,22 +30,20 @@ public class ItemManager extends Manager<Item>
     }
 
     @Override
-    public void load(Collection<Integer> ids)
+    public void load(Collection<Integer> idsTOLoad)
     {
 	finishedTreads = 0;
+	ids.removeAll(ids);
 	//remove duplicates
-	List<Integer> tmp = new ArrayList<Integer>();
-	for(int id : ids)
+	for(int id : idsTOLoad)
 	{
-	    if(!tmp.contains(id))
+	    if(!isLoaded(id))
 	    {
-		tmp.add(id);
+		ids.add(id);
 	    }
 	}
-	this.ids = tmp;
-	tmp = null;
 	
-	idsToLoad = this.ids.size();
+	idsToLoad = ids.size();
 	//create a list for each thread
 	List<List<Integer>> sub = new ArrayList<List<Integer>>();
 	

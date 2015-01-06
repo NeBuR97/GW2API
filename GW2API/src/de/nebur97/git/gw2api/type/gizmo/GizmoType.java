@@ -13,16 +13,16 @@ public enum GizmoType
     /**
      * For Black Lion Chest Keys.
      */
-    CONJTAINER_KEY,
+    CONTAINERKEY,
     
     /**
      * For time-limited NPC services (e.g. Golem Banker, Personal Merchant
      * Express)
      */
-    RENTABLE_CONTRACT_NPC,
+    RENTABLECONTRACTNPC,
     
     /**
      * For Permanent Self-Style Hair Kit
      */
-    UNLIMITED_CONSUMABLE;
+    UNLIMITEDCONSUMABLE;
 }

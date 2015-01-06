@@ -79,6 +79,6 @@ public enum WEAPON
 	    return TwoHanded.valueOf(type);
 	} catch(Exception e) {/* Type is not two-handed */
 	}
-	throw new IllegalArgumentException(type+" is not a WeaponType!");
+	throw new IllegalArgumentException(type+" is not a valid WeaponType!");
     }
 }
