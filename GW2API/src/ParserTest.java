@@ -8,6 +8,7 @@ import javax.json.Json;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
 
+import de.nebur97.git.gw2api.GW2API;
 import de.nebur97.git.gw2api.item.Item;
 import de.nebur97.git.gw2api.manager.item.ItemManager;
 import de.nebur97.git.gw2api.manager.recipe.RecipeManager;
@@ -16,80 +17,27 @@ import de.nebur97.git.gw2api.recipe.Recipe;
 public class ParserTest
 {
     
-    public static void main(String[] args) throws InterruptedException, MalformedURLException, IOException
+    public static void main(String[] args) throws MalformedURLException, IOException
     {
-	/*long start = System.currentTimeMillis();
-	JsonParser p = Json.createParser(new URL("https://api.guildwars2.com/v1/items.json").openStream());
-	List<Integer> ids = new ArrayList<Integer>();
-	
-	while(p.hasNext()) {
-	    if(p.next() == Event.VALUE_NUMBER) {
-		ids.add(p.getInt());
-		System.out.println(p.getInt());
-		if(ids.size() == 5) {
-		    p.close();
-		    break;
-		}
-	    }
-	}
-	ItemManager man = new ItemManager();
-	System.out.println("Loading " + ids.size() + " ids with " + man.getThreadCount() + " threads.");
-	man.load(ids);
-	
-	while( !man.isFinished()) {
-	}
-	System.out.println(man.getEntryList().size());
-	System.out.println("Time taken: " + (System.currentTimeMillis() - start ));
-	
-	for(Item i : man.getEntryList())
-	{
-	    System.out.println(i);
-	}*/
+    	GW2API api = new GW2API();
+    	api.loadAllRecipesCurrentlyDiscovered();
     	
-    	/*JsonParser r = Json.createParser(new URL("https://api.guildwars2.com/v2/recipes/7319").openStream());
-    	while(r.hasNext())
-    	{
-    		Event e = r.next();
-    		if(e == Event.KEY_NAME || e == Event.VALUE_STRING)
-    		{
-    			System.out.println(e + ":" + r.getString());
-    		} else if(e == Event.VALUE_NUMBER)
-    		{
-    			System.out.println(e + ":" + r.getInt());
-    		} else {
-    			System.out.println(e);
-    		}
-    	}*/
+    	while(api.recipesAreBeingLoaded()){}
+    	System.out.println(api.getRecipeManager().getEntryList().size()+" recipes");
     	
-    	JsonParser r = Json.createParser(new URL("https://api.guildwars2.com/v1/recipes.json").openStream());
     	List<Integer> ids = new ArrayList<Integer>();
-    	
-    	while(r.hasNext())
+    	for(Recipe r : api.getRecipes())
     	{
-    		if(r.next() == Event.VALUE_NUMBER)
-    		{
-    			ids.add(r.getInt());
-    			if(ids.size() == 100)
-    			{
-    				break;
-    			}
-    		}
+    		ids.add(r.getOutputItemID());
     	}
     	
-    	long start = System.currentTimeMillis();
-    	RecipeManager man = new RecipeManager();
-    	man.load(ids);
+    	api.loadItems(ids);
     	
-    	while(!man.isFinished())
-    	{
-    		
-    	}
-    	System.out.println("Loaded "+man.getEntryList().size()+" in "+ (System.currentTimeMillis() - start)+"ms");
-
-    	for(Recipe re : man.getEntryList())
-    	{
-    		System.out.println(re);
-    	}
+    	while(api.itemsAreBeingLoaded()){}
+    	
+    	System.out.println(api.getItems().size() + " items loaded");
+    	
+    	api.loadPrices(api.getItems());
     }
     
 }

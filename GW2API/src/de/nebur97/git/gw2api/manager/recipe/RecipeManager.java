@@ -20,7 +20,7 @@ public class RecipeManager extends Manager<Recipe> {
 		outIDMap.put(r.getOutputItemID(), r);
 	}
 	
-	public Recipe get(int outputItemID)
+	public Recipe getRecipeViaOutputOD(int outputItemID)
 	{
 		return outIDMap.get(outputItemID);
 	}

@@ -14,7 +14,7 @@ public class ItemManager extends Manager<Item>
     private HashMap<String,Item> itemName = new HashMap<String,Item>();
     private int errors = 0;
     private int idsToLoad;
-    private List<Integer> ids;
+    private List<Integer> ids = new ArrayList<Integer>();
     
     @Override
     public synchronized void add(Item i)
