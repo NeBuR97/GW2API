@@ -294,7 +294,11 @@ public class Item implements EntryWithID
      */
     public Flag[] getFlags()
     {
-	return flags.toArray(new Flag[flags.size()]);
+    	if(flags.isEmpty())
+    	{
+    		flags.add(Flag.NONE);
+    	}
+    	return flags.toArray(new Flag[flags.size()]);
     }
     
     /**
@@ -332,7 +336,11 @@ public class Item implements EntryWithID
      */
     public Restriction[] getRestrictions()
     {
-	return restrictions.toArray(new Restriction[restrictions.size()]);
+    	if(restrictions.isEmpty())
+    	{
+    		restrictions.add(Restriction.NONE);
+    	}
+    	return restrictions.toArray(new Restriction[restrictions.size()]);
     }
     
     @Override

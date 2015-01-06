@@ -32,7 +32,7 @@ public class Gear extends Item implements Infusable
      */
     public Attribute[] getAttributes()
     {
-	return stats.toArray(new Attribute[stats.size()]);
+    	return stats.toArray(new Attribute[stats.size()]);
     }
     
     /**
@@ -106,6 +106,10 @@ public class Gear extends Item implements Infusable
     @Override
     public Infusion[] getInfusionSlots()
     {
-	return iF.toArray(new Infusion[iF.size()]);
+    	if(iF.isEmpty())
+    	{
+    		iF.add(Infusion.NONE);
+    	}
+    	return iF.toArray(new Infusion[iF.size()]);
     }
 }
