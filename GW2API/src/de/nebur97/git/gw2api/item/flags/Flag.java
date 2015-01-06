@@ -70,5 +70,7 @@ public enum Flag
     /**
      * Unique.
      */
-    UNIQUE;
+    UNIQUE,
+    
+    NONE;
 }
