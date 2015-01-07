@@ -5,8 +5,8 @@ import de.nebur97.git.gw2api.item.Item;
 public class TPEntry {
 	private Item item;
 	private int id;
-	private double buy;
-	private double sell;
+	private int buy;
+	private int sell;
 	private int supply;
 	private int demand;
 	
@@ -22,16 +22,16 @@ public class TPEntry {
 	public void setID(int id) {
 		this.id = id;
 	}
-	public double getBuy() {
+	public int getBuy() {
 		return buy;
 	}
-	public void setBuy(double buy) {
+	public void setBuy(int buy) {
 		this.buy = buy;
 	}
-	public double getSell() {
+	public int getSell() {
 		return sell;
 	}
-	public void setSell(double sell) {
+	public void setSell(int sell) {
 		this.sell = sell;
 	}
 	public int getSupply() {
@@ -47,26 +47,19 @@ public class TPEntry {
 		this.demand = demand;
 	}
 	
-	//0=id,1=buy,2=sell,3=supply,4=demand
-	protected void setProperty(int c, int value)
+	public String getBuyPriceInGW2Format()
 	{
-		switch(c)
-		{
-		case 0:
-			id = value;
-			break;
-		case 1:
-			buy = value;
-			break;
-		case 2:
-			sell = value;
-			break;
-		case 3:
-			supply = value;
-			break;
-		case 4:
-			demand = value;
-			break;
-		}
+		
+        return TradingPost.copperValuetoGW2StandardCurrencyString(buy);
+	}
+	
+	public String getSellPriceInGW2Format()
+	{
+		return TradingPost.copperValuetoGW2StandardCurrencyString(sell);
+	}
+	@Override
+	public String toString()
+	{
+		return "id:"+id+",buy:"+buy+",sell:"+sell+",demand:"+demand+",supply:"+supply;
 	}
 }

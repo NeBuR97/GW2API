@@ -30,9 +30,9 @@ public class Gear extends Item implements Infusable
      * 
      * @return an array of Attributes
      */
-    public Attribute[] getAttributes()
+    public ArrayList<Attribute> getAttributes()
     {
-    	return stats.toArray(new Attribute[stats.size()]);
+    	return new ArrayList<Attribute>(stats);
     }
     
     /**
@@ -104,12 +104,12 @@ public class Gear extends Item implements Infusable
     }
 
     @Override
-    public Infusion[] getInfusionSlots()
+    public List<Infusion> getInfusionSlots()
     {
     	if(iF.isEmpty())
     	{
     		iF.add(Infusion.NONE);
     	}
-    	return iF.toArray(new Infusion[iF.size()]);
+    	return new ArrayList<Infusion>(iF);
     }
 }

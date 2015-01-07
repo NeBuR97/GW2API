@@ -13,7 +13,9 @@ public abstract class Manager<T>
 {
     protected HashMap<Integer,T> entryIDs = new HashMap<Integer,T>();
     protected int threadCount = (int)Math.pow(2, Runtime.getRuntime().availableProcessors());
-    protected int finishedTreads = 0;
+    protected int finishedThreads = 0;
+    protected boolean isLoading = false;
+    protected int neededThreads = 0;
     protected List<Thread> threads = new ArrayList<Thread>();
     /**
      * Get an element via it's id. Returns null if no element is present (although the map may contain a null value, I believe recipes and items will never be null, thus making null a definitive return type).
@@ -40,7 +42,7 @@ public abstract class Manager<T>
      */
     public synchronized void add(T obj)
     {
-	entryIDs.put(((EntryWithID)obj).getID(), obj);
+    	entryIDs.put(((EntryWithID)obj).getID(), obj);
     }
     
     /**
@@ -71,12 +73,14 @@ public abstract class Manager<T>
      */
     abstract public void load(Collection<Integer> ids);
     
-    public void setThreadCount(int threads)
+    public void setThreadCount(int threads) throws Exception
     {
-	if(isFinished())
-	{
-	    threadCount = threads;
-	}
+		if(!isLoading())
+		{
+		    threadCount = threads;
+		} else {
+			throw new Exception("You cannot change the threadcount while threads are running!");
+		}
     }
     
     public int getThreadCount()
@@ -84,16 +88,30 @@ public abstract class Manager<T>
 	return threadCount;
     }
     
-    abstract public boolean isFinished();
+    public boolean isLoading()
+    {
+    	synchronized(this)
+    	{
+    		return isLoading;
+    	}
+    }
     
     public synchronized void incrementFinishedThreads()
     {
-	finishedTreads++;
+    	finishedThreads++;
+    	if(finishedThreads == neededThreads)
+    	{
+    		synchronized(this)
+    		{
+    			isLoading = false;
+    		}
+    		
+    	}
     }
     
     public int getFinishedThreads()
     {
-	return finishedTreads;
+	return finishedThreads;
     }
     
     protected void executeThread(Thread t)

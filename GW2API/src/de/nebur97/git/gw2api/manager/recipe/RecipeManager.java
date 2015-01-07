@@ -26,7 +26,8 @@ public class RecipeManager extends Manager<Recipe> {
 	}
 	@Override
 	public void load(Collection<Integer> idsTOLoad) {
-		finishedTreads = 0;
+		isLoading = true;
+		finishedThreads = 0;
 		ids.removeAll(ids);
 		for(int id : idsTOLoad)
 		{
@@ -36,7 +37,7 @@ public class RecipeManager extends Manager<Recipe> {
 			}
 		}
 		idsToLoad = ids.size();
-		int neededThreads = (idsToLoad < threadCount) ? idsToLoad : threadCount;
+		neededThreads = (idsToLoad < threadCount) ? idsToLoad : threadCount;
 		List<List<Integer>> sub = new ArrayList<List<Integer>>();
 		for(int a = 0; a < neededThreads; a++)
 		{
@@ -64,12 +65,13 @@ public class RecipeManager extends Manager<Recipe> {
 		}
 	}
 
-	@Override
-	public boolean isFinished() {
+	/*@Override
+	public boolean isLoading() {
 		synchronized(entryIDs){
-		    return entryIDs.size() == idsToLoad;
+		    return entryIDs.size() < idsToLoad;
 		}
-	}
+		return isLoading;
+	}*/
 	
 	public String getProgress()
     {

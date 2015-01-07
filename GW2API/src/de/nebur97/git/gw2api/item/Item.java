@@ -12,6 +12,7 @@ import de.nebur97.git.gw2api.item.gametypes.GameType;
 import de.nebur97.git.gw2api.item.restrictions.Restriction;
 import de.nebur97.git.gw2api.manager.EntryWithID;
 import de.nebur97.git.gw2api.rarity.Rarity;
+import de.nebur97.git.gw2api.tradingpost.TPEntry;
 import de.nebur97.git.gw2api.type.Type;
 
 /**
@@ -41,6 +42,7 @@ public class Item implements EntryWithID
     private List<GameType> gameTypes = new ArrayList<GameType>();
     private List<Flag> flags = new ArrayList<Flag>();
     private List<Restriction> restrictions = new ArrayList<Restriction>();
+    private TPEntry tpEntry;
     
     public Item(Item parent)
     {
@@ -256,9 +258,9 @@ public class Item implements EntryWithID
      * @return an array of game types
      * @see GameType
      */
-    public GameType[] getGameTypes()
+    public ArrayList<GameType> getGameTypes()
     {
-	return gameTypes.toArray(new GameType[gameTypes.size()]);
+    	return new ArrayList<GameType>(gameTypes);
     }
     
     /**
@@ -292,13 +294,13 @@ public class Item implements EntryWithID
      * 
      * @return an array of flags
      */
-    public Flag[] getFlags()
+    public ArrayList<Flag> getFlags()
     {
     	if(flags.isEmpty())
     	{
     		flags.add(Flag.NONE);
     	}
-    	return flags.toArray(new Flag[flags.size()]);
+    	return new ArrayList<Flag>(flags);
     }
     
     /**
@@ -334,13 +336,13 @@ public class Item implements EntryWithID
      * @return an array of restrictions
      * @see Restriction
      */
-    public Restriction[] getRestrictions()
+    public ArrayList<Restriction> getRestrictions()
     {
     	if(restrictions.isEmpty())
     	{
     		restrictions.add(Restriction.NONE);
     	}
-    	return restrictions.toArray(new Restriction[restrictions.size()]);
+    	return new ArrayList<Restriction>(restrictions);
     }
     
     @Override
@@ -354,10 +356,10 @@ public class Item implements EntryWithID
 	    {
 		try {
 		    Object val = m.invoke(this);
-		    if(val instanceof Object[])
+		    if(val instanceof List)
 		    {
 			b.append(m.getName().replace("get", "")+"{");
-			for(Object o : (Object[])val)
+			for(Object o : (List)val)
 			{
 			    b.append(o+",");
 			}
@@ -491,6 +493,26 @@ public class Item implements EntryWithID
     {
         this.itemType = itemType;
     }
+	public TPEntry getTradingPostEntry() {
+		return tpEntry;
+	}
+	public void setTradingPostEntry(TPEntry tpEntry) {
+		this.tpEntry = tpEntry;
+	}
 
+	public boolean hasFlag(Flag f)
+	{
+		return flags.contains(f);
+	}
+	
+	public boolean hasRestriction(Restriction r)
+	{
+		return restrictions.contains(r);
+	}
+	
+	public boolean isGameType(GameType g)
+	{
+		return gameTypes.contains(g);
+	}
 
 }

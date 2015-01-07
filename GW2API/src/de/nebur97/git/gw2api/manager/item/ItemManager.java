@@ -14,7 +14,6 @@ public class ItemManager extends Manager<Item>
     private HashMap<String,Item> itemName = new HashMap<String,Item>();
     private int errors = 0;
     private int idsToLoad;
-    private List<Integer> ids = new ArrayList<Integer>();
     
     @Override
     public synchronized void add(Item i)
@@ -30,16 +29,15 @@ public class ItemManager extends Manager<Item>
     }
 
     @Override
-    public void load(Collection<Integer> idsTOLoad)
-    {
-	finishedTreads = 0;
-	ids.removeAll(ids);
+    public void load(Collection<Integer> ids){
+    	isLoading = true;
+	finishedThreads = 0;
 	//remove duplicates
-	for(int id : idsTOLoad)
+	for(int id : ids)
 	{
-	    if(!isLoaded(id))
+	    if(isLoaded(id))
 	    {
-		ids.add(id);
+	    	ids.remove(id);
 	    }
 	}
 	
@@ -47,7 +45,7 @@ public class ItemManager extends Manager<Item>
 	//create a list for each thread
 	List<List<Integer>> sub = new ArrayList<List<Integer>>();
 	
-	int neededThreads = (idsToLoad < threadCount) ? idsToLoad : threadCount;
+	neededThreads = (idsToLoad < threadCount) ? idsToLoad : threadCount;
 	for(int a = 0; a < neededThreads; a++)
 	{
 	    sub.add(new ArrayList<Integer>());
@@ -57,11 +55,8 @@ public class ItemManager extends Manager<Item>
 	System.out.println(sub.size());
 	for(int id : ids)
 	{
-	    if(!isLoaded(id))
-	    {
-		 sub.get(index).add(id);
-		 index++;
-	    }
+		sub.get(index).add(id);
+		index++;
 	    if(index == neededThreads)
 	    {
 		index = 0;
@@ -79,16 +74,16 @@ public class ItemManager extends Manager<Item>
 	errors++;
     }
     
-    @Override
-    public boolean isFinished()
+    /*@Override
+    public boolean isLoading()
     {
-	synchronized(entryIDs){
-	    return entryIDs.size() == (idsToLoad-errors);
-	}
-    }
+    	return isLoading;
+    }*/
     
     public String getProgress()
     {
+    	synchronized(entryIDs){
 	return entryIDs.size()+"/"+(idsToLoad-errors);
+    	}
     }
 }

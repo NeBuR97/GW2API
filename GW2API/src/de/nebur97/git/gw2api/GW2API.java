@@ -21,10 +21,10 @@ import de.nebur97.git.gw2api.tradingpost.TradingPost;
 public class GW2API {
 	private ItemManager iCache = new ItemManager();
 	private RecipeManager rCache = new RecipeManager();
-	private TradingPost tp = new TradingPost();
+	private TradingPost tp = new TradingPost(this);
 	private int threads;
 	
-	public GW2API(){
+	public GW2API() throws Exception{
 		int cores = Runtime.getRuntime().availableProcessors();
 		if(cores <= 4)
 		{
@@ -35,18 +35,23 @@ public class GW2API {
 		iCache.setThreadCount(threads);
 		rCache.setThreadCount(threads);
 	}
-	public GW2API(int threads)
+	public GW2API(int threads) throws Exception
 	{
 		iCache.setThreadCount(threads);
 		rCache.setThreadCount(threads);
 		this.threads = threads;
 	}
 	
-	public void setThreadCount(int threads)
+	public void setThreadCount(int threads) throws Exception
 	{
-		iCache.setThreadCount(threads);
-		rCache.setThreadCount(threads);
-		this.threads = threads;
+		try {
+			iCache.setThreadCount(threads);
+			rCache.setThreadCount(threads);
+			this.threads = threads;
+		} catch (Exception e) {
+			throw e;
+		}
+		
 	}
 	
 	public int getThreadCount()
@@ -56,7 +61,7 @@ public class GW2API {
 	
 	public boolean loadItems(Collection<Integer> ids)
 	{
-		if(iCache.isFinished())
+		if(!iCache.isLoading())
 		{
 			iCache.load(ids);
 			return true;
@@ -67,7 +72,7 @@ public class GW2API {
 	
 	public boolean loadRecipes(Collection<Integer> ids)
 	{
-		if(rCache.isFinished())
+		if(!rCache.isLoading())
 		{
 			rCache.load(ids);
 			return true;
@@ -78,25 +83,36 @@ public class GW2API {
 	
 	public int loadAllRecipesCurrentlyDiscovered() throws MalformedURLException, IOException
 	{
-		if(rCache.isFinished())
+		if(!rCache.isLoading())
 		{
-			JsonParser r = Json.createParser(new URL("https://api.guildwars2.com/v1/recipes.json").openStream());
-	    	List<Integer> ids = new ArrayList<Integer>();
-	    	
-	    	while(r.hasNext())
-	    	{
-	    		if(r.next() == Event.VALUE_NUMBER)
-	    		{
-	    			ids.add(r.getInt());
-	    		}
-	    	}
+	    	List<Integer> ids = getAllDiscoveredRecipeIDs(0);
 	    	loadRecipes(ids);
 	    	return ids.size();
 		} else {
-			return -1;
+			throw new IOException("RecipeManager is already loading recipes!");
 		}
 	}
 	
+	public List<Integer> getAllDiscoveredRecipeIDs(int maxSize) throws MalformedURLException, IOException
+	{
+		boolean hasMaxSize = maxSize > 0;
+		JsonParser r = Json.createParser(new URL("https://api.guildwars2.com/v1/recipes.json").openStream());
+    	List<Integer> ids = new ArrayList<Integer>();
+    	
+    	while(r.hasNext())
+    	{
+    		if(r.next() == Event.VALUE_NUMBER)
+    		{
+    			ids.add(r.getInt());
+    			if(hasMaxSize && ids.size() == maxSize)
+    			{
+    				break;
+    			}
+    		}
+    	}
+    	
+    	return ids;
+	}
 	public ItemManager getItemManager()
 	{
 		return iCache;
@@ -129,10 +145,7 @@ public class GW2API {
 	
 	public void loadPricesViaIDs(Collection<Integer> ids)
 	{
-		for(int id : ids)
-		{
-			tp.loadPrice(id);
-		}
+		tp.loadPrices(ids);
 	}
 	
 	public void loadPrices(Collection<Item> items)
@@ -147,12 +160,12 @@ public class GW2API {
 	
 	public boolean recipesAreBeingLoaded()
 	{
-		return !rCache.isFinished();
+		return rCache.isLoading();
 	}
 	
 	public boolean itemsAreBeingLoaded()
 	{
-		return !iCache.isFinished();
+		return iCache.isLoading();
 	}
 	
 	public List<Recipe> getRecipes()
@@ -163,5 +176,25 @@ public class GW2API {
 	public List<Item> getItems()
 	{
 		return iCache.getEntryList();
+	}
+	
+	public TradingPost getTradingPost()
+	{
+		return tp;
+	}
+	
+	public boolean pricesAreBeingLoaded()
+	{
+		return tp.isLoading();
+	}
+	
+	public TPEntry getTradingPostEntry(Item i)
+	{
+		return getTradingPostEntry(i.getID());
+	}
+	
+	public TPEntry getTradingPostEntry(int id)
+	{
+		return tp.getEntry(id);
 	}
 }
