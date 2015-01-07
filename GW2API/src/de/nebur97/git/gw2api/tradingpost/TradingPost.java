@@ -86,7 +86,7 @@ public class TradingPost implements Iterable<TPEntry>{
 		this.loading = loading;
 	}
 	
-	public static String copperValuetoGW2StandardCurrencyString(int copper)
+	public static String copperValueToGW2StandardCurrencyString(int copper)
 	{
 		String line = ""+copper;
         int l = line.length();
