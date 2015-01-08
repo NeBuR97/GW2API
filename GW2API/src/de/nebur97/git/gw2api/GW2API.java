@@ -197,4 +197,14 @@ public class GW2API {
 	{
 		return tp.getEntry(id);
 	}
+	
+	/*
+	 * DUMMY CODE! needed for saving this stuff.
+	 * // Load the directory as a resource
+		URL dir_url = ClassLoader.getSystemResource(dir_path);
+		// Turn the resource into a File object
+		File dir = new File(dir_url.toURI());
+		// List the directory
+		String files = dir.list()
+	 */
 }

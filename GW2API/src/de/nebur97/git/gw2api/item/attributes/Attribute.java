@@ -1,5 +1,7 @@
 package de.nebur97.git.gw2api.item.attributes;
 
+import java.io.Serializable;
+
 /**
  * An object representing an attribute.
  * To create an attribute, use the factory method
@@ -8,9 +10,14 @@ package de.nebur97.git.gw2api.item.attributes;
  * @see AttributeType
  * @author NeBuR97
  **/
-public class Attribute
+public class Attribute implements Serializable
 {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3859063184780135709L;
+
+	/**
      * Attributes. <li>ConditionDamage <li>CritDamage (= Ferocity. It's called
      * CritDamage in the API.) <li>Healing <li>Power <li>Precision <li>Toughness
      * <li>Vitality

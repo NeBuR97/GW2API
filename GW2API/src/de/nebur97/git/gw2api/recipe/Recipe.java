@@ -1,5 +1,6 @@
 package de.nebur97.git.gw2api.recipe;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,9 +19,13 @@ import de.nebur97.git.gw2api.type.refinement.RefinementType;
  * 
  * @author NeBuR97
  **/
-public class Recipe implements EntryWithID
+public class Recipe implements EntryWithID, Serializable
 {
-    private int id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3405428868960116050L;
+	private int id;
     private Object type;
     private int outputItemID;
     private int outputItemCount;

@@ -1,9 +1,15 @@
 package de.nebur97.git.gw2api.tradingpost;
 
+import java.io.Serializable;
+
 import de.nebur97.git.gw2api.item.Item;
 
-public class TPEntry {
-	private Item item;
+public class TPEntry implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2237053978430581438L;
+	private transient Item item;
 	private int id;
 	private int buy;
 	private int sell;
@@ -50,12 +56,12 @@ public class TPEntry {
 	public String getBuyPriceInGW2Format()
 	{
 		
-        return TradingPost.copperValuetoGW2StandardCurrencyString(buy);
+        return TradingPost.copperValueToGW2StandardCurrencyString(buy);
 	}
 	
 	public String getSellPriceInGW2Format()
 	{
-		return TradingPost.copperValuetoGW2StandardCurrencyString(sell);
+		return TradingPost.copperValueToGW2StandardCurrencyString(sell);
 	}
 	@Override
 	public String toString()

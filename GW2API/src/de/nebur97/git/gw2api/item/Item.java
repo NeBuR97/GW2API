@@ -1,5 +1,6 @@
 package de.nebur97.git.gw2api.item;
 
+import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
@@ -27,9 +28,13 @@ import de.nebur97.git.gw2api.type.Type;
  * 
  * @author NeBuR97
  **/
-public class Item implements EntryWithID
+public class Item implements EntryWithID, Serializable
 {
-    //not to be confused with type! This is for identification purposes only.
+    /**
+	 * eclipse wanted me to, I have no clue what this means tbh.
+	 */
+	private static final long serialVersionUID = 8986220910498373063L;
+	//not to be confused with type! This is for identification purposes only.
     private Type itemType;
     private int id;
     private String name;

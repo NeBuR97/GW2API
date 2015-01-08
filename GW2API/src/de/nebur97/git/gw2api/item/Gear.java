@@ -16,7 +16,10 @@ import de.nebur97.git.gw2api.type.armor.ArmorType;
  */
 public class Gear extends Item implements Infusable
 {
-    public Gear(Item parent)
+    
+	private static final long serialVersionUID = 5898140190966652182L;
+
+	public Gear(Item parent)
     {
 	super(parent);
     }
