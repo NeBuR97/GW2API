@@ -11,6 +11,7 @@ import java.util.HashMap;
  **/
 public abstract class Manager<T> implements Serializable
 {
+<<<<<<< HEAD
     private static final long serialVersionUID = 1958428812706515101L;
     protected HashMap<Integer, T> entryIDs = new HashMap<Integer, T>();
     protected transient int finishedThreads = 0;
@@ -28,6 +29,14 @@ public abstract class Manager<T> implements Serializable
 	entryIDs.put(((EntryWithID) obj ).getID(), obj);
     }
     
+=======
+    protected HashMap<Integer,T> entryIDs = new HashMap<Integer,T>();
+    protected int threadCount = (int)Math.pow(2, Runtime.getRuntime().availableProcessors());
+    protected int finishedThreads = 0;
+    protected boolean isLoading = false;
+    protected int neededThreads = 0;
+    protected List<Thread> threads = new ArrayList<Thread>();
+>>>>>>> origin/master
     /**
      * Get an element via it's id. Returns null if no element is present (although the map may contain a null value, I believe recipes and items will never be null, thus making null a definitive return type).
      * @param id
@@ -58,6 +67,7 @@ public abstract class Manager<T> implements Serializable
      */
     public int getThreadCount()
     {
+<<<<<<< HEAD
 	return threadCount;
     }
     
@@ -70,6 +80,9 @@ public abstract class Manager<T> implements Serializable
     public synchronized boolean isLoaded(int id)
     {
 	return entryIDs.containsKey(id);
+=======
+    	entryIDs.put(((EntryWithID)obj).getID(), obj);
+>>>>>>> origin/master
     }
     
     /**
@@ -100,6 +113,7 @@ public abstract class Manager<T> implements Serializable
      */
     abstract public void load(Collection<Integer> ids);
     
+<<<<<<< HEAD
     /**
      * Set the amount of threads to use.
      * @param threads
@@ -114,4 +128,52 @@ public abstract class Manager<T> implements Serializable
 	}
     }
     
+=======
+    public void setThreadCount(int threads) throws Exception
+    {
+		if(!isLoading())
+		{
+		    threadCount = threads;
+		} else {
+			throw new Exception("You cannot change the threadcount while threads are running!");
+		}
+    }
+    
+    public int getThreadCount()
+    {
+	return threadCount;
+    }
+    
+    public boolean isLoading()
+    {
+    	synchronized(this)
+    	{
+    		return isLoading;
+    	}
+    }
+    
+    public synchronized void incrementFinishedThreads()
+    {
+    	finishedThreads++;
+    	if(finishedThreads == neededThreads)
+    	{
+    		synchronized(this)
+    		{
+    			isLoading = false;
+    		}
+    		
+    	}
+    }
+    
+    public int getFinishedThreads()
+    {
+	return finishedThreads;
+    }
+    
+    protected void executeThread(Thread t)
+    {
+	threads.add(t);
+	t.start();
+    }
+>>>>>>> origin/master
 }

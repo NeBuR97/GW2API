@@ -30,11 +30,20 @@ import de.nebur97.git.gw2api.type.Type;
  **/
 public class Item implements EntryWithID, Serializable
 {
+<<<<<<< HEAD
     private static final long serialVersionUID = 8986220910498373063L;
     private String desc;
     private List<Flag> flags = new ArrayList<Flag>();
     private List<GameType> gameTypes = new ArrayList<GameType>();
     private URL icon;
+=======
+    /**
+	 * eclipse wanted me to, I have no clue what this means tbh.
+	 */
+	private static final long serialVersionUID = 8986220910498373063L;
+	//not to be confused with type! This is for identification purposes only.
+    private Type itemType;
+>>>>>>> origin/master
     private int id;
     // not to be confused with type! This is for identification purposes only.
     private Type itemType;
@@ -43,11 +52,14 @@ public class Item implements EntryWithID, Serializable
     private Rarity rare;
     private List<Restriction> restrictions = new ArrayList<Restriction>();
     private TPEntry tpEntry;
+<<<<<<< HEAD
     private Object type = "No type specified";
     private int vendorValue;
     
     public Item()
     {}
+=======
+>>>>>>> origin/master
     
     public Item(Item parent)
     {
@@ -363,9 +375,15 @@ public class Item implements EntryWithID, Serializable
      * 
      * @param level
      */
+<<<<<<< HEAD
     public void setLevel(int level)
     {
 	this.level = level;
+=======
+    public ArrayList<GameType> getGameTypes()
+    {
+    	return new ArrayList<GameType>(gameTypes);
+>>>>>>> origin/master
     }
     
     /**
@@ -445,9 +463,19 @@ public class Item implements EntryWithID, Serializable
      * @param rarity
      * @see de.nebur97.git.gw2api.rarity.Rarity Rarity
      */
+<<<<<<< HEAD
     public void setRarity(Rarity rare)
     {
 	this.rare = rare;
+=======
+    public ArrayList<Flag> getFlags()
+    {
+    	if(flags.isEmpty())
+    	{
+    		flags.add(Flag.NONE);
+    	}
+    	return new ArrayList<Flag>(flags);
+>>>>>>> origin/master
     }
     
     public void setTradingPostEntry(TPEntry tpEntry)
@@ -471,9 +499,19 @@ public class Item implements EntryWithID, Serializable
      * 
      * @param vendorValue
      */
+<<<<<<< HEAD
     public void setVendorValue(int vendorValue)
     {
 	this.vendorValue = vendorValue;
+=======
+    public ArrayList<Restriction> getRestrictions()
+    {
+    	if(restrictions.isEmpty())
+    	{
+    		restrictions.add(Restriction.NONE);
+    	}
+    	return new ArrayList<Restriction>(restrictions);
+>>>>>>> origin/master
     }
     
     @SuppressWarnings("rawtypes")
@@ -486,10 +524,19 @@ public class Item implements EntryWithID, Serializable
 	    if(m.getName().contains("get")) {
 		try {
 		    Object val = m.invoke(this);
+<<<<<<< HEAD
 		    if(val instanceof List) {
 			b.append(m.getName().replace("get", "") + "{");
 			for(Object o : (List) val) {
 			    b.append(o + ",");
+=======
+		    if(val instanceof List)
+		    {
+			b.append(m.getName().replace("get", "")+"{");
+			for(Object o : (List)val)
+			{
+			    b.append(o+",");
+>>>>>>> origin/master
 			}
 			b.append("}\n");
 		    } else if(val != null && !m.getName().contains("Class")) {
@@ -518,5 +565,30 @@ public class Item implements EntryWithID, Serializable
     {
 	this.itemType = itemType;
     }
+<<<<<<< HEAD
     
+=======
+	public TPEntry getTradingPostEntry() {
+		return tpEntry;
+	}
+	public void setTradingPostEntry(TPEntry tpEntry) {
+		this.tpEntry = tpEntry;
+	}
+
+	public boolean hasFlag(Flag f)
+	{
+		return flags.contains(f);
+	}
+	
+	public boolean hasRestriction(Restriction r)
+	{
+		return restrictions.contains(r);
+	}
+	
+	public boolean isGameType(GameType g)
+	{
+		return gameTypes.contains(g);
+	}
+
+>>>>>>> origin/master
 }

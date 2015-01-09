@@ -12,8 +12,11 @@ public enum GizmoType
      * For Black Lion Chest Keys.
      */
     CONTAINERKEY,
+<<<<<<< HEAD
     
     DEFAULT,
+=======
+>>>>>>> origin/master
     
     /**
      * For time-limited NPC services (e.g. Golem Banker, Personal Merchant
