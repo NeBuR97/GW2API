@@ -18,46 +18,27 @@ import de.nebur97.git.gw2api.type.weapon.WEAPON;
  */
 public class Weapon extends Gear
 {
+    private static final long serialVersionUID = 1100001169029261102L;
     
+    private DamageType dType;
+    
+    private int maxPow;
+    private int minPow;
     public Weapon(Item parent)
     {
 	super(parent);
 	setItemType(Type.WEAPON);
     }
-
-    private int minPow;
-    private int maxPow;
-    private DamageType dType;
-    
-    public void setType(String type)
-    {
-	try{
-	    setType(WEAPON.getWeaponType(type));
-	}catch(Exception e)
-	{
-	    e.printStackTrace();
-	}
-    }
     
     /**
-     * Get the weapons minimum damage.
+     * Get the damage type.
      * 
-     * @return minimum weapon power
+     * @return damagetype
+     * @see de.nebur97.git.gw2api.type.weapon.DamageType DamageType
      */
-    public int getMinPower()
+    public DamageType getDamageType()
     {
-	return minPow;
-    }
-    
-    /**
-     * Set the minimum damage.
-     * 
-     * @param minPow
-     * - the minimum power
-     */
-    public void setMinPower(int minPow)
-    {
-	this.minPow = minPow;
+	return dType;
     }
     
     /**
@@ -71,25 +52,13 @@ public class Weapon extends Gear
     }
     
     /**
-     * Set the maximum damage.
+     * Get the weapons minimum damage.
      * 
-     * @param maxPow
-     * - maximum power
+     * @return minimum weapon power
      */
-    public void setMaxPower(int maxPow)
+    public int getMinPower()
     {
-	this.maxPow = maxPow;
-    }
-    
-    /**
-     * Get the damage type.
-     * 
-     * @return damagetype
-     * @see de.nebur97.git.gw2api.type.weapon.DamageType DamageType
-     */
-    public DamageType getDamageType()
-    {
-	return dType;
+	return minPow;
     }
     
     /**
@@ -108,21 +77,55 @@ public class Weapon extends Gear
     {
 	setDamageType(DamageType.valueOf(dType.toUpperCase()));
     }
+    
+    /**
+     * Set the maximum damage.
+     * 
+     * @param maxPow
+     * - maximum power
+     */
+    public void setMaxPower(int maxPow)
+    {
+	this.maxPow = maxPow;
+    }
+    
+    /**
+     * Set the minimum damage.
+     * 
+     * @param minPow
+     * - the minimum power
+     */
+    public void setMinPower(int minPow)
+    {
+	this.minPow = minPow;
+    }
+    
     @Override
     public void setProperty(String prop, Object value)
     {
 	switch(prop)
 	{
-	case "damage_type":
-	    setDamageType(value.toString());
-	    break;
-	case "min_power":
-	    minPow = (Integer)value;
-	    break;
-	case "max_power":
-	    maxPow = (Integer)value;
-	    break;
-	default: super.setProperty(prop, value);
+	    case "damage_type":
+		setDamageType(value.toString());
+		break;
+	    case "min_power":
+		minPow = (Integer) value;
+		break;
+	    case "max_power":
+		maxPow = (Integer) value;
+		break;
+	    default:
+		super.setProperty(prop, value);
+	}
+    }
+    
+    public void setType(String type)
+    {
+	try {
+	    setType(WEAPON.getWeaponType(type));
+	}
+	catch(Exception e) {
+	    e.printStackTrace();
 	}
     }
 }

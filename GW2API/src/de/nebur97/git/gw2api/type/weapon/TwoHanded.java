@@ -12,6 +12,18 @@ public enum TwoHanded implements WeaponType
     GREATSWORD, HAMMER, LONGBOW, RIFLE, SHORTBOW, STAFF;
     
     @Override
+    public boolean canBeOffHand()
+    {
+	return false;
+    }
+    
+    @Override
+    public WEAPON getCategory()
+    {
+	return WEAPON.TWOHANDED;
+    }
+    
+    @Override
     public boolean isAquatic()
     {
 	return false;
@@ -39,17 +51,5 @@ public enum TwoHanded implements WeaponType
     public boolean isTwoHanded()
     {
 	return true;
-    }
-    
-    @Override
-    public boolean canBeOffHand()
-    {
-	return false;
-    }
-
-    @Override
-    public WEAPON getCategory()
-    {
-	return WEAPON.TWOHANDED;
     }
 }

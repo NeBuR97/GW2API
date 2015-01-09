@@ -10,18 +10,14 @@ import de.nebur97.git.gw2api.type.Type;
  */
 public class Tool extends Item
 {
+    private static final long serialVersionUID = -7842231480239949737L;
+    
+    private int charges;
+    
     public Tool(Item parent)
     {
 	super(parent);
 	setItemType(Type.TOOL);
-    }
-
-    private int charges;
-    
-    @Override
-    public Type getType()
-    {
-	return Type.TOOL;
     }
     
     /**
@@ -32,6 +28,12 @@ public class Tool extends Item
     public int getCharges()
     {
 	return charges;
+    }
+    
+    @Override
+    public Type getType()
+    {
+	return Type.TOOL;
     }
     
     /**

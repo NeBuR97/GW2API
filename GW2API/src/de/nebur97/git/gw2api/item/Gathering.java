@@ -11,23 +11,24 @@ import de.nebur97.git.gw2api.type.gathering.GatheringType;
  */
 public class Gathering extends Item
 {
+    private static final long serialVersionUID = 2056196266122355559L;
     
     public Gathering(Item parent)
     {
 	super(parent);
 	setItemType(Type.GATHERING);
     }
-
+    
     /**
      * @see #setType(String)
      * @param t
      */
     public void setType(String s)
     {
-	try{
+	try {
 	    setType(GatheringType.valueOf(s.toUpperCase()));
-	}catch(Exception e)
-	{
+	}
+	catch(Exception e) {
 	    e.printStackTrace();
 	}
 	

@@ -8,21 +8,21 @@ package de.nebur97.git.gw2api.type.gizmo;
  */
 public enum GizmoType
 {
-    DEFAULT,
-    
     /**
      * For Black Lion Chest Keys.
      */
-    CONJTAINER_KEY,
+    CONTAINERKEY,
+    
+    DEFAULT,
     
     /**
      * For time-limited NPC services (e.g. Golem Banker, Personal Merchant
      * Express)
      */
-    RENTABLE_CONTRACT_NPC,
+    RENTABLECONTRACTNPC,
     
     /**
      * For Permanent Self-Style Hair Kit
      */
-    UNLIMITED_CONSUMABLE;
+    UNLIMITEDCONSUMABLE;
 }

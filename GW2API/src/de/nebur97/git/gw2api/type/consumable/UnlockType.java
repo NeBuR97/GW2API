@@ -29,9 +29,9 @@ public enum UnlockType
     /** Dyes **/
     DYE,
     
-    /** Outfits **/
-    UNKNOWN,
-    
     /** If no type is specified **/
-    NONE;
+    NONE,
+    
+    /** Outfits **/
+    UNKNOWN;
 }

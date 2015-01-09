@@ -11,24 +11,47 @@ import de.nebur97.git.gw2api.type.consumable.UnlockType;
  **/
 public class Consumable extends Item
 {
+    private static final long serialVersionUID = -2755684123581197910L;
+    
+    private int colorID;
+    
+    private long durMS;
+    private int recipeID;
+    private UnlockType unlockType = UnlockType.NONE;
     public Consumable(Item parent)
     {
 	super(parent);
 	setItemType(Type.CONSUMABLE);
     }
-
-    private long durMS;
-    private int colorID;
-    private int recipeID;
-    private UnlockType unlockType = UnlockType.NONE;
     
-    public void setType(String t)
+    /**
+     * he dye id for dye unlocks.
+     * 
+     * @return dye id
+     */
+    public int getColorID()
     {
-	try {
-	    setType(ConsumableType.valueOf(t.toUpperCase()));
-	} catch(Exception e) {
-	    e.printStackTrace();
-	}
+	return colorID;
+    }
+    
+    /**
+     * Effect duration in milliseconds.
+     * 
+     * @return duration in ms
+     */
+    public long getDurationMS()
+    {
+	return durMS;
+    }
+    
+    /**
+     * The recipe id for recipe unlocks.
+     * 
+     * @return recipe id
+     */
+    public int getRecipeID()
+    {
+	return recipeID;
     }
     
     /**
@@ -43,38 +66,13 @@ public class Consumable extends Item
     }
     
     /**
-     * Set the unlock type.
+     * Set the unlockable dye's id.
      * 
-     * @param ut
+     * @param colorID
      */
-    public void setUnlockType(UnlockType ut)
+    public void setColorID(int colorID)
     {
-	unlockType = ut;
-    }
-    
-    /**
-     * Set the unlock type defines in the string. The default value
-     * {@link UnlockType#NONE} is used, if no type is found.
-     * 
-     * @param ut
-     */
-    public void setUnlockType(String ut)
-    {
-	try {
-	    setUnlockType(UnlockType.valueOf(ut.toUpperCase()));
-	} catch(Exception e) {
-	    e.printStackTrace();
-	}
-    }
-    
-    /**
-     * Effect duration in milliseconds.
-     * 
-     * @return duration in ms
-     */
-    public long getDurationMS()
-    {
-	return durMS;
+	this.colorID = colorID;
     }
     
     /**
@@ -88,36 +86,6 @@ public class Consumable extends Item
     }
     
     /**
-     * he dye id for dye unlocks.
-     * 
-     * @return dye id
-     */
-    public int getColorID()
-    {
-	return colorID;
-    }
-    
-    /**
-     * Set the unlockable dye's id.
-     * 
-     * @param colorID
-     */
-    public void setColorID(int colorID)
-    {
-	this.colorID = colorID;
-    }
-    
-    /**
-     * The recipe id for recipe unlocks.
-     * 
-     * @return recipe id
-     */
-    public int getRecipeID()
-    {
-	return recipeID;
-    }
-    
-    /**
      * Set the unlockable recipe's id.
      * 
      * @param recipeID
@@ -125,5 +93,41 @@ public class Consumable extends Item
     public void setRecipeID(int recipeID)
     {
 	this.recipeID = recipeID;
+    }
+    
+    public void setType(String t)
+    {
+	try {
+	    setType(ConsumableType.valueOf(t.toUpperCase()));
+	}
+	catch(Exception e) {
+	    e.printStackTrace();
+	}
+    }
+    
+    /**
+     * Set the unlock type defines in the string. The default value
+     * {@link UnlockType#NONE} is used, if no type is found.
+     * 
+     * @param ut
+     */
+    public void setUnlockType(String ut)
+    {
+	try {
+	    setUnlockType(UnlockType.valueOf(ut.toUpperCase()));
+	}
+	catch(Exception e) {
+	    e.printStackTrace();
+	}
+    }
+    
+    /**
+     * Set the unlock type.
+     * 
+     * @param ut
+     */
+    public void setUnlockType(UnlockType ut)
+    {
+	unlockType = ut;
     }
 }
