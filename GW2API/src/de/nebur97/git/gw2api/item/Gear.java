@@ -16,37 +16,15 @@ import de.nebur97.git.gw2api.item.infusions.Infusion;
 public class Gear extends Item implements Infusable
 {
     
-<<<<<<< HEAD
     private static final long serialVersionUID = 5898140190966652182L;
     
-=======
-	private static final long serialVersionUID = 5898140190966652182L;
-
-	public Gear(Item parent)
-    {
-	super(parent);
-    }
-
-    private List<Attribute> stats = new ArrayList<Attribute>();
->>>>>>> origin/master
     private List<Infusion> iF = new ArrayList<Infusion>();
     
-<<<<<<< HEAD
     private List<Attribute> stats = new ArrayList<Attribute>();
     private int suffixID;
     public Gear(Item parent)
     {
 	super(parent);
-=======
-    /**
-     * Get an array containing all added attributes.
-     * 
-     * @return an array of Attributes
-     */
-    public ArrayList<Attribute> getAttributes()
-    {
-    	return new ArrayList<Attribute>(stats);
->>>>>>> origin/master
     }
     
     /**
@@ -125,7 +103,6 @@ public class Gear extends Item implements Infusable
 	}
 	
     }
-<<<<<<< HEAD
     
     /**
      * Set the suffix ID
@@ -136,16 +113,5 @@ public class Gear extends Item implements Infusable
     public void setSuffixID(int suffixID)
     {
 	this.suffixID = suffixID;
-=======
-
-    @Override
-    public List<Infusion> getInfusionSlots()
-    {
-    	if(iF.isEmpty())
-    	{
-    		iF.add(Infusion.NONE);
-    	}
-    	return new ArrayList<Infusion>(iF);
->>>>>>> origin/master
     }
 }
