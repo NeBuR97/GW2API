@@ -10,14 +10,12 @@ import de.nebur97.git.gw2api.type.Type;
  */
 public class Trophy extends Item
 {
-    private static final long serialVersionUID = -301379636215992700L;
-    
     public Trophy(Item parent)
     {
 	super(parent);
 	setItemType(Type.TROPHY);
     }
-    
+
     @Override
     public Type getType()
     {

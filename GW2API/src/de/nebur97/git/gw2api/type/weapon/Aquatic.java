@@ -12,18 +12,6 @@ public enum Aquatic implements WeaponType
     HARPOON, SPEARGUN, TRIDENT;
     
     @Override
-    public boolean canBeOffHand()
-    {
-	return false;
-    }
-    
-    @Override
-    public WEAPON getCategory()
-    {
-	return WEAPON.AQUATIC;
-    }
-    
-    @Override
     public boolean isAquatic()
     {
 	return true;
@@ -51,5 +39,17 @@ public enum Aquatic implements WeaponType
     public boolean isTwoHanded()
     {
 	return true;
+    }
+    
+    @Override
+    public boolean canBeOffHand()
+    {
+	return false;
+    }
+
+    @Override
+    public WEAPON getCategory()
+    {
+	return WEAPON.AQUATIC;
     }
 }

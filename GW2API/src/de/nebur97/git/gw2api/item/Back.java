@@ -15,14 +15,12 @@ public class Back extends Gear
      * This class is just for organization.
      */
     
-    private static final long serialVersionUID = 697344236798926285L;
-    
     public Back(Item parent)
     {
 	super(parent);
 	setItemType(Type.BACK);
     }
-    
+
     @Override
     public Type getType()
     {

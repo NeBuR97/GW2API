@@ -11,14 +11,12 @@ import de.nebur97.git.gw2api.type.trinket.TrinketType;
  */
 public class Trinket extends Gear
 {
-    private static final long serialVersionUID = -2060364013833520424L;
-    
     public Trinket(Item parent)
     {
 	super(parent);
 	setItemType(Type.TRINKET);
     }
-    
+
     /**
      * Set this trinket's type.
      * 
@@ -27,10 +25,10 @@ public class Trinket extends Gear
      */
     public void setType(String t)
     {
-	try {
+	try{
 	    setType(TrinketType.valueOf(t.toUpperCase()));
-	}
-	catch(Exception e) {
+	}catch(Exception e)
+	{
 	    e.printStackTrace();
 	}
 	

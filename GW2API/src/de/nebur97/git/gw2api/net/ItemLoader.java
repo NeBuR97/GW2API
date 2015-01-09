@@ -1,4 +1,4 @@
-package de.nebur97.git.gw2api.manager.item;
+package de.nebur97.git.gw2api.net;
 
 import java.net.URL;
 import java.util.List;
@@ -9,6 +9,7 @@ import javax.json.stream.JsonParser.Event;
 
 import de.nebur97.git.gw2api.item.Item;
 import de.nebur97.git.gw2api.item.attributes.Attribute;
+import de.nebur97.git.gw2api.manager.item.ItemManager;
 
 /**
  * A thread to load items based on a list of ids.
@@ -19,23 +20,29 @@ import de.nebur97.git.gw2api.item.attributes.Attribute;
 public class ItemLoader extends Thread implements Runnable
 {
     public static String ITEM_API_URL = "https://api.guildwars2.com/v2/items/";
-    private ItemManager cache;
     private List<Integer> ids;
-    private Item item;
+    private int id;
     private JsonParser parser;
+    private Item item;
+    private ItemManager cache;
     
     /**
      * Create a new Thread with the list of ids.
      * 
      * @param ids
      */
-    ItemLoader(ItemManager manager, List<Integer> ids)
+    public ItemLoader(ItemManager manager, List<Integer> ids)
     {
 	this.ids = ids;
 	cache = manager;
-	System.out.println("Created a new ItemLoader with " + ids.size() + " ids.");
+	System.out.println("Created a new ItemLoader with "+ids.size()+" ids.");
     }
     
+    public ItemLoader(ItemManager manager, int id)
+    {
+	this.id = id;
+	cache = manager;
+    }
     @Override
     public void run()
     {
@@ -47,6 +54,7 @@ public class ItemLoader extends Thread implements Runnable
 		parser = Json.createParser(new URL(ITEM_API_URL + id).openStream());
 		item = new Item();
 		
+		// this bool
 		boolean subtype = false;
 		while(parser.hasNext()) {
 		    Event e = parser.next();
@@ -136,18 +144,18 @@ public class ItemLoader extends Thread implements Runnable
 		    }
 		}
 		c++;
-		System.out.println(this.getName() + " loaded item: " + c + "/" + ids.size() + " " + item.getID() + "," + item.getName() + " in " + (System.currentTimeMillis() - start ) + "ms");
+		System.out.println(this.getName()+" loaded item: "+c+"/"+ids.size()+" "+item.getID()+","+item.getName()+" in "+(System.currentTimeMillis()-start)+"ms");
 		cache.add(item);
 	    }
 	    catch(Exception e) {
 		c++;
-		System.err.println(c + " Error at " + id);
+		System.err.println(c+" Error at "+id);
 		cache.incrementErrors();
 	    }
 	    
 	}
 	cache.incrementFinishedThreads();
-	System.out.println(getName() + " is finished, total of " + cache.getFinishedThreads() + " finished threads.");
+	System.out.println(getName()+" is finished, total of "+ cache.getFinishedThreads()+" finished threads.");
     }
     
     private void basicArray(String name)

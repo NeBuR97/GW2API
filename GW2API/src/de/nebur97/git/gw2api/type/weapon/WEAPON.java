@@ -52,38 +52,33 @@ public enum WEAPON
 	String type = t.toUpperCase();
 	// check if type is mentioned in Aquatic
 	try {
-	    return Aquatic.valueOf(type);
-	}
-	catch(Exception e) {/* Type is not aquatic */
+	   return Aquatic.valueOf(type);
+	} catch(Exception e) {/* Type is not aquatic */
 	}
 	
 	// offhand
 	try {
 	    return OffHand.valueOf(type);
-	}
-	catch(Exception e) {/* Type is not an offhand */
+	} catch(Exception e) {/* Type is not an offhand */
 	}
 	
 	// one-handed
 	try {
 	    return OneHanded.valueOf(type);
-	}
-	catch(Exception e) {/* Type is not one-handed */
+	} catch(Exception e) {/* Type is not one-handed */
 	}
 	
 	// other
 	try {
 	    return Other.valueOf(type);
-	}
-	catch(Exception e) {/* Type is not in other */
+	} catch(Exception e) {/* Type is not in other */
 	}
 	
 	// Twohanded
 	try {
 	    return TwoHanded.valueOf(type);
+	} catch(Exception e) {/* Type is not two-handed */
 	}
-	catch(Exception e) {/* Type is not two-handed */
-	}
-	throw new IllegalArgumentException(type + " is not a valid WeaponType!");
+	throw new IllegalArgumentException(type+" is not a WeaponType!");
     }
 }

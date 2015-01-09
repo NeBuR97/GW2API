@@ -10,44 +10,31 @@ import de.nebur97.git.gw2api.type.upgradecomponent.UpgradeCompType;
 
 public class UpgradeComponent extends Item
 {
-    private static final long serialVersionUID = -7710778294363754961L;
-    private Infusion applicableInfusion;
     private List<UpgradeCompFlag> flags = new ArrayList<UpgradeCompFlag>();
     private String suffix;
+    private Infusion applicableInfusion;
+    
     
     public UpgradeComponent(Item parent)
     {
 	super(parent);
 	setItemType(Type.UPGRADECOMPONENT);
     }
+
     
     /**
-     * @see #addUpgradeFlag(UpgradeCompFlag)
-     */
-    public void addUpgradeFlag(String s)
-    {
-	addUpgradeFlag(UpgradeCompFlag.valueOf(s.toUpperCase()));
-    }
-    
-    /**
-     * Add a flag.
+     * Set the upgrade'S type.
      * 
-     * @param f
-     * @see UpgradeCompFlag
+     * @param t
      */
-    public void addUpgradeFlag(UpgradeCompFlag f)
+    public void setType(String t)
     {
-	flags.add(f);
-    }
-    
-    /**
-     * Get the applicable infusion.
-     * 
-     * @return infusion
-     */
-    public Infusion getApplicableInfusion()
-    {
-	return applicableInfusion;
+	try{
+	    setType(UpgradeCompType.valueOf(t.toUpperCase()));
+	}catch(Exception e)
+	{
+	    e.printStackTrace();
+	}
     }
     
     /**
@@ -61,13 +48,23 @@ public class UpgradeComponent extends Item
     }
     
     /**
-     * Get all upgrade flags
+     * Set the name suffix.
      * 
-     * @return an array of upgrade flags.
+     * @param suffix
      */
-    public UpgradeCompFlag[] getUpgradeFlags()
+    public void setSuffix(String suffix)
     {
-	return flags.toArray(new UpgradeCompFlag[flags.size()]);
+	this.suffix = suffix;
+    }
+    
+    /**
+     * Get the applicable infusion.
+     * 
+     * @return infusion
+     */
+    public Infusion getApplicableInfusion()
+    {
+	return applicableInfusion;
     }
     
     /**
@@ -88,35 +85,38 @@ public class UpgradeComponent extends Item
     {
 	try {
 	    setApplicableInfusion(Infusion.valueOf(inf.toUpperCase()));
-	}
-	catch(Exception e) {
+	} catch(Exception e) {
 	    e.printStackTrace();
 	    setApplicableInfusion(Infusion.NONE);
 	}
     }
     
     /**
-     * Set the name suffix.
+     * Add a flag.
      * 
-     * @param suffix
+     * @param f
+     * @see UpgradeCompFlag
      */
-    public void setSuffix(String suffix)
+    public void addUpgradeFlag(UpgradeCompFlag f)
     {
-	this.suffix = suffix;
+	flags.add(f);
     }
     
     /**
-     * Set the upgrade'S type.
-     * 
-     * @param t
+     * @see #addUpgradeFlag(UpgradeCompFlag)
      */
-    public void setType(String t)
+    public void addUpgradeFlag(String s)
     {
-	try {
-	    setType(UpgradeCompType.valueOf(t.toUpperCase()));
-	}
-	catch(Exception e) {
-	    e.printStackTrace();
-	}
+	addUpgradeFlag(UpgradeCompFlag.valueOf(s.toUpperCase()));
+    }
+    
+    /**
+     * Get all upgrade flags
+     * 
+     * @return an array of upgrade flags.
+     */
+    public UpgradeCompFlag[] getUpgradeFlags()
+    {
+	return flags.toArray(new UpgradeCompFlag[flags.size()]);
     }
 }

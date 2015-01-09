@@ -13,16 +13,14 @@ import de.nebur97.git.gw2api.type.armor.WeightClass;
  **/
 public class Armor extends Gear
 {
-    private static final long serialVersionUID = 2484690254290587234L;
-    
-    private int def;
-    
-    private WeightClass wClass;
     public Armor(Item parent)
     {
 	super(parent);
 	setItemType(Type.ARMOR);
     }
+
+    private int def;
+    private WeightClass wClass;
     
     /**
      * Gets the armor's defense value.
@@ -32,6 +30,16 @@ public class Armor extends Gear
     public int getDefense()
     {
 	return def;
+    }
+    
+    /**
+     * Sets the armor's defense value.
+     * 
+     * @param def
+     */
+    public void setDefense(int def)
+    {
+	this.def = def;
     }
     
     /**
@@ -46,47 +54,6 @@ public class Armor extends Gear
     }
     
     /**
-     * Sets the armor's defense value.
-     * 
-     * @param def
-     */
-    public void setDefense(int def)
-    {
-	this.def = def;
-    }
-    
-    @Override
-    public void setProperty(String prop, Object value)
-    {
-	switch(prop)
-	{
-	    case "defense":
-		def = (Integer) value;
-		break;
-	    case "weight_class":
-		setWeightClass(value.toString());
-		break;
-	    default:
-		super.setProperty(prop, value);
-	}
-    }
-    
-    /**
-     * @see Item#setType(Object)
-     * @param type
-     */
-    public void setType(String type)
-    {
-	try {
-	    setType(ArmorType.valueOf(type.toUpperCase()));
-	}
-	catch(Exception e) {
-	    e.printStackTrace();
-	}
-	
-    }
-    
-    /**
      * Sets the weight class.
      * 
      * @param wClass
@@ -97,6 +64,35 @@ public class Armor extends Gear
 	this.wClass = WeightClass.valueOf(wClass.toUpperCase());
     }
     
+    /**
+     * @see Item#setType(Object)
+     * @param type
+     */
+    public void setType(String type)
+    {
+	try{
+	    setType(ArmorType.valueOf(type.toUpperCase()));
+	} catch(Exception e)
+	{
+	    e.printStackTrace();
+	}
+	
+    }
+    
+    @Override
+    public void setProperty(String prop, Object value)
+    {
+	switch(prop)
+	{
+	case "defense":
+	    def = (Integer)value;
+	    break;
+	case "weight_class":
+	    setWeightClass(value.toString());
+	    break;
+	default: super.setProperty(prop, value);
+	}
+    }
     protected String name()
     {
 	return "Armor";

@@ -10,7 +10,7 @@ package de.nebur97.git.gw2api.type.weapon;
  **/
 public enum DamageType
 {
+    FIRE, ICE, LIGHTNING, PHYSICAL,
     /** Currently not used. **/
-    CHOKING, FIRE, ICE, LIGHTNING,
-    PHYSICAL;
+    CHOKING;
 }

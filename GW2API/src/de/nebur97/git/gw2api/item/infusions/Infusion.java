@@ -10,19 +10,9 @@ package de.nebur97.git.gw2api.item.infusions;
 public enum Infusion
 {
     /**
-     * Agony infuision slot.
-     */
-    AGONY,
-    
-    /**
      * Defenisve infusion slot.
      */
     DEFENSIVE,
-    
-    /**
-     * No infusion slot.
-     */
-    NONE,
     
     /**
      * Offensive infusion slot.
@@ -32,5 +22,15 @@ public enum Infusion
     /**
      * Utility infusioon slot,
      */
-    UTILITY;
+    UTILITY,
+    
+    /**
+     * Agony infuision slot.
+     */
+    AGONY,
+    
+    /**
+     * No infusion slot.
+     */
+    NONE;
 }

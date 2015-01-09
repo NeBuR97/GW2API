@@ -1,7 +1,5 @@
 package de.nebur97.git.gw2api.item.infusions;
 
-import java.util.List;
-
 /**
  * Implemented by items with an infusion slot, such as armor.
  * 
@@ -26,5 +24,5 @@ public interface Infusable
      * @return The infusion slot
      * @see Infusion
      */
-    public List<Infusion> getInfusionSlots();
+    public Infusion[] getInfusionSlots();
 }

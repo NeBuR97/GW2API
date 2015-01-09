@@ -1,33 +1,20 @@
 package de.nebur97.git.gw2api.manager;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * This class provides features to manage items and recipes.
  * @author NeBuR97
  **/
-public abstract class Manager<T> implements Serializable
+public abstract class Manager<T>
 {
-    private static final long serialVersionUID = 1958428812706515101L;
-    protected HashMap<Integer, T> entryIDs = new HashMap<Integer, T>();
-    protected transient int finishedThreads = 0;
-    protected transient int idsToLoad;
-    protected transient boolean isLoading = false;
-    protected transient int neededThreads = 0;
-    protected transient int threadCount = (int) Math.pow(2, Runtime.getRuntime().availableProcessors());
-    
-    /**
-     * Adds an entry.
-     * @param obj
-     */
-    public synchronized void add(T obj)
-    {
-	entryIDs.put(((EntryWithID) obj ).getID(), obj);
-    }
-    
+    protected HashMap<Integer,T> entryIDs = new HashMap<Integer,T>();
+    protected int threadCount = (int)Math.pow(2, Runtime.getRuntime().availableProcessors());
+    protected int finishedTreads = 0;
+    protected List<Thread> threads = new ArrayList<Thread>();
     /**
      * Get an element via it's id. Returns null if no element is present (although the map may contain a null value, I believe recipes and items will never be null, thus making null a definitive return type).
      * @param id
@@ -47,29 +34,13 @@ public abstract class Manager<T> implements Serializable
 	return new ArrayList<T>(entryIDs.values());
     }
     
-    public int getFinishedThreads()
-    {
-	return finishedThreads;
-    }
-    
     /**
-     * Get the threadcount
-     * @return this manager's threadcount
+     * Adds an entry.
+     * @param obj
      */
-    public int getThreadCount()
+    public synchronized void add(T obj)
     {
-	return threadCount;
-    }
-    
-    /**
-     * Checks if the map contains this id (contained in the map = loaded).
-     * @param id
-     * @return true if the entry is present and loaded.
-     * @see #isLoaded(Object)
-     */
-    public synchronized boolean isLoaded(int id)
-    {
-	return entryIDs.containsKey(id);
+	entryIDs.put(((EntryWithID)obj).getID(), obj);
     }
     
     /**
@@ -83,14 +54,14 @@ public abstract class Manager<T> implements Serializable
     }
     
     /**
-     * Check if this manager is loading.
-     * @return isLoading
+     * Checks if the map contains this id (contained in the map = loaded).
+     * @param id
+     * @return true if the entry is present and loaded.
+     * @see #isLoaded(Object)
      */
-    public boolean isLoading()
+    public boolean isLoaded(int id)
     {
-	synchronized(this) {
-	    return isLoading;
-	}
+	return entryIDs.containsKey(id);
     }
     
     /**
@@ -100,18 +71,34 @@ public abstract class Manager<T> implements Serializable
      */
     abstract public void load(Collection<Integer> ids);
     
-    /**
-     * Set the amount of threads to use.
-     * @param threads
-     * @throws Exception - When threads are currently running
-     */
-    public void setThreadCount(int threads) throws Exception
+    public void setThreadCount(int threads)
     {
-	if( !isLoading()) {
+	if(isFinished())
+	{
 	    threadCount = threads;
-	} else {
-	    throw new Exception("You cannot change the threadcount while threads are running!");
 	}
     }
     
+    public int getThreadCount()
+    {
+	return threadCount;
+    }
+    
+    abstract public boolean isFinished();
+    
+    public synchronized void incrementFinishedThreads()
+    {
+	finishedTreads++;
+    }
+    
+    public int getFinishedThreads()
+    {
+	return finishedTreads;
+    }
+    
+    protected void executeThread(Thread t)
+    {
+	threads.add(t);
+	t.start();
+    }
 }
