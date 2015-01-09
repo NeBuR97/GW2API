@@ -22,7 +22,6 @@ import de.nebur97.git.gw2api.type.refinement.RefinementType;
  **/
 public class Recipe implements EntryWithID, Serializable
 {
-<<<<<<< HEAD
     private static final long serialVersionUID = 3405428868960116050L;
     
     private List<Discipline> disciplines = new ArrayList<Discipline>();
@@ -32,15 +31,6 @@ public class Recipe implements EntryWithID, Serializable
     private HashMap<Integer, Integer> ingredients = new HashMap<Integer, Integer>();
     private int minRating;
     private transient Item outputItem;
-=======
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3405428868960116050L;
-	private int id;
-    private Object type;
-    private int outputItemID;
->>>>>>> origin/master
     private int outputItemCount;
     private int outputItemID;
     private String outputItemName;
@@ -92,52 +82,12 @@ public class Recipe implements EntryWithID, Serializable
     @Override
     public int getID()
     {
-<<<<<<< HEAD
 	return id;
     }
     
     public int getIngredientCount(int id)
     {
 	return ingredients.get(id);
-=======
-	Object t = Type.getType(s);
-	if(t == Type.NONE)
-	{
-	   try{
-	       t = FoodType.valueOf(s.toUpperCase());
-	       type = t;
-	       return;
-	   }catch(Exception e)
-	   {
-	       //System.err.println(s + " is not a valid FoodType!");
-	   }
-	   
-	   try{
-	       t = CraftingMaterialType.valueOf(s.toUpperCase());
-	       type = t;
-	       return;
-	   }catch(Exception e)
-	   {
-		   //System.err.println(s + " is not a valid CraftingMaterialType!");
-	   }
-	   
-	   try{
-	       t = RefinementType.valueOf(s.toUpperCase());
-	       type = t;
-	       return;
-	   }catch(Exception e)
-	   {
-		   //System.err.println(s + " is not a valid RefinementType!");
-	   }
-	} else {
-		if(t instanceof Object[])
-		{
-			type = ((Object[])t)[1];
-		} else {
-			type = t;
-		}
-	}
->>>>>>> origin/master
     }
     
     /**
@@ -262,15 +212,6 @@ public class Recipe implements EntryWithID, Serializable
 	this.outputItemName = outputItemName;
     }
     
-    public void setRecipeFlag(String flag)
-    {
-    	try{
-    		this.flag = RecipeFlag.valueOf(flag.toUpperCase());
-    	}catch(Exception e)
-    	{
-    		e.printStackTrace();
-    	}
-    }
     /**
      * <li>id
      * <li>type
@@ -361,7 +302,6 @@ public class Recipe implements EntryWithID, Serializable
      */
     public void setType(String s)
     {
-<<<<<<< HEAD
 	Object t = Type.getType(s);
 	if(t == Type.NONE) {
 	    try {
@@ -414,77 +354,5 @@ public class Recipe implements EntryWithID, Serializable
 	}
 	b.append("},\nflag:" + flag + "}");
 	return b.toString();
-=======
-    	Set<Integer> keys= ingredients.keySet();
-    	return keys.toArray(new Integer[keys.size()]);
-    }
-    
-    public int getIngredientCount(int id)
-    {
-    	return ingredients.get(id);
-    }
-    /**
-     * <li>id
-     * <li>type
-     * <li>output_item_id
-     * <li>output_item_count
-     * <li>min_rating
-     * <li>time_to_craft_ms
-     * <li>disciplines
-     * <li>flags
-     * <li>ingredients <i>an int array, where 0 = id and 1 = count</i>
-     * @param prop
-     * @param value
-     */
-    public void setProperty(String prop, Object value)
-    {
-    	switch(prop)
-    	{
-    	case "id":
-    		id = (int)value;
-    		break;
-    	case "type":
-    		setType(value.toString());
-    		break;
-    	case "output_item_id":
-    		outputItemID = (int)value;
-    		break;
-    	case "output_item_count":
-    		outputItemCount = (int)value;
-    		break;
-    	case "min_rating":
-    		minRating = (int)value;
-    	case "time_to_craft_ms":
-    		timeToCraftMs = (int)value;
-    		break;
-    	case "disciplines":
-    		addDiscipline(value.toString());
-    		break;
-    	case "flags":
-    		setRecipeFlag(value.toString());
-    		break;
-    	case "ingredients":
-    		int[] ing = (int[])value;
-    		addIngredient(ing[0], ing[1]);
-    		break;
-    	}
-    }
-    
-    @Override
-    public String toString(){
-    	StringBuilder b = new StringBuilder();
-    	b.append("{id:" + id + ",\ntype:"+type+",\noutput_item_id:"+outputItemID+",\noutput_item_count:"+outputItemCount+",\ntime_to_craft_ms:"+timeToCraftMs+",\ndisciplines:{");
-    	for(Discipline d : disciplines)
-    	{
-    		b.append(d+",");
-    	}
-    	b.append("},\nmin_rating:"+minRating+",\ningredients:{");
-    	for(int id : ingredients.keySet())
-    	{
-    		b.append("{id:"+id+",count:"+ingredients.get(id)+"},");
-    	}
-    	b.append("},\nflag:"+flag+"}");
-    	return b.toString();
->>>>>>> origin/master
     }
 }
