@@ -5,24 +5,15 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
 import de.nebur97.git.gw2api.item.Item;
 import de.nebur97.git.gw2api.manager.Manager;
 
 public class ItemManager extends Manager<Item>
 {
-<<<<<<< HEAD
     private static final long serialVersionUID = 4744813022001326143L;
     private transient int errors = 0;
     private HashMap<String, Item> itemName = new HashMap<String, Item>();
-=======
-    private HashMap<String,Item> itemName = new HashMap<String,Item>();
-    private int errors = 0;
-    private int idsToLoad;
->>>>>>> origin/master
     
     @Override
     public synchronized void add(Item i)
@@ -45,7 +36,6 @@ public class ItemManager extends Manager<Item>
     }
     
     @Override
-<<<<<<< HEAD
     public void load(Collection<Integer> ids)
     {
 	isLoading = true;
@@ -58,53 +48,24 @@ public class ItemManager extends Manager<Item>
 		    isLoading = false;
 		    break;
 		}
-=======
-    public void load(Collection<Integer> ids){
-    	isLoading = true;
-	finishedThreads = 0;
-	//remove duplicates
-	for(int id : ids)
-	{
-	    if(isLoaded(id))
-	    {
-	    	ids.remove(id);
->>>>>>> origin/master
 	    }
 	}
 	
 	idsToLoad = ids.size();
-<<<<<<< HEAD
 	// create a list for each thread
 	List<List<Integer>> sub = new ArrayList<List<Integer>>();
 	
 	neededThreads = (idsToLoad < threadCount ) ? idsToLoad : threadCount;
 	for(int a = 0; a < neededThreads; a++) {
-=======
-	//create a list for each thread
-	List<List<Integer>> sub = new ArrayList<List<Integer>>();
-	
-	neededThreads = (idsToLoad < threadCount) ? idsToLoad : threadCount;
-	for(int a = 0; a < neededThreads; a++)
-	{
->>>>>>> origin/master
 	    sub.add(new ArrayList<Integer>());
 	}
 	
 	int index = 0;
 	System.out.println(sub.size());
-<<<<<<< HEAD
 	for(int id : ids) {
 	    sub.get(index).add(id);
 	    index++;
 	    if(index == neededThreads) {
-=======
-	for(int id : ids)
-	{
-		sub.get(index).add(id);
-		index++;
-	    if(index == neededThreads)
-	    {
->>>>>>> origin/master
 		index = 0;
 	    }
 	}
@@ -129,22 +90,13 @@ public class ItemManager extends Manager<Item>
 	}
     }
     
-<<<<<<< HEAD
     synchronized void incrementErrors()
     {
 	errors++;
     }
-=======
-    /*@Override
-    public boolean isLoading()
-    {
-    	return isLoading;
-    }*/
->>>>>>> origin/master
     
     synchronized void incrementFinishedThreads()
     {
-<<<<<<< HEAD
 	finishedThreads++;
 	if(finishedThreads == neededThreads) {
 	    synchronized(this) {
@@ -152,10 +104,5 @@ public class ItemManager extends Manager<Item>
 	    }
 	    
 	}
-=======
-    	synchronized(entryIDs){
-	return entryIDs.size()+"/"+(idsToLoad-errors);
-    	}
->>>>>>> origin/master
     }
 }
