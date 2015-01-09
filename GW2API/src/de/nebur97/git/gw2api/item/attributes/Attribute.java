@@ -13,22 +13,10 @@ import java.io.Serializable;
 public class Attribute implements Serializable
 {
     /**
-<<<<<<< HEAD
     * Attributes. <li>ConditionDamage <li>CritDamage (= Ferocity. It's called
     * CritDamage in the API.) <li>Healing <li>Power <li>Precision <li>Toughness
     * <li>Vitality
     **/
-=======
-	 * 
-	 */
-	private static final long serialVersionUID = -3859063184780135709L;
-
-	/**
-     * Attributes. <li>ConditionDamage <li>CritDamage (= Ferocity. It's called
-     * CritDamage in the API.) <li>Healing <li>Power <li>Precision <li>Toughness
-     * <li>Vitality
-     **/
->>>>>>> origin/master
     public enum AttributeType
     {
 	/**
