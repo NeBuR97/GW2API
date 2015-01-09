@@ -1,9 +1,5 @@
 package de.nebur97.git.gw2api.item.infusions;
 
-<<<<<<< HEAD
-=======
-import java.util.ArrayList;
->>>>>>> origin/master
 import java.util.List;
 
 /**
