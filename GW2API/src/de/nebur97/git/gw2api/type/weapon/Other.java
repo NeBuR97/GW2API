@@ -32,6 +32,18 @@ public enum Other implements WeaponType
     };
     
     @Override
+    public boolean canBeOffHand()
+    {
+	return false;
+    }
+    
+    @Override
+    public WEAPON getCategory()
+    {
+	return WEAPON.OTHER;
+    }
+    
+    @Override
     public boolean isAquatic()
     {
 	return false;
@@ -59,17 +71,5 @@ public enum Other implements WeaponType
     public boolean isTwoHanded()
     {
 	return false;
-    }
-    
-    @Override
-    public boolean canBeOffHand()
-    {
-	return false;
-    }
-
-    @Override
-    public WEAPON getCategory()
-    {
-	return WEAPON.OTHER;
     }
 }

@@ -11,13 +11,15 @@ import de.nebur97.git.gw2api.type.gizmo.GizmoType;
  */
 public class Gizmo extends Item
 {
+    private static final long serialVersionUID = -3504473715660108829L;
+    
+    private GizmoType type;
+    
     public Gizmo(Item parent)
     {
 	super(parent);
 	setItemType(Type.GIZMO);
     }
-
-    private GizmoType type;
     
     @Override
     public GizmoType getType()
@@ -31,10 +33,10 @@ public class Gizmo extends Item
      */
     public void setType(String s)
     {
-	try{
+	try {
 	    setType(GizmoType.valueOf(s.toUpperCase()));
-	}catch(Exception e)
-	{
+	}
+	catch(Exception e) {
 	    e.printStackTrace();
 	}
 	

@@ -11,6 +11,18 @@ public enum OffHand implements WeaponType
     FOCUS, SHIELD, TORCH, WARHORN;
     
     @Override
+    public boolean canBeOffHand()
+    {
+	return true;
+    }
+    
+    @Override
+    public WEAPON getCategory()
+    {
+	return WEAPON.OFFHAND;
+    }
+    
+    @Override
     public boolean isAquatic()
     {
 	return false;
@@ -38,17 +50,5 @@ public enum OffHand implements WeaponType
     public boolean isTwoHanded()
     {
 	return false;
-    }
-    
-    @Override
-    public boolean canBeOffHand()
-    {
-	return true;
-    }
-
-    @Override
-    public WEAPON getCategory()
-    {
-	return WEAPON.OFFHAND;
     }
 }

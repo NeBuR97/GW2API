@@ -11,12 +11,14 @@ import de.nebur97.git.gw2api.type.container.ContainerType;
  */
 public class Container extends Item
 {
+    private static final long serialVersionUID = 4533051674321344693L;
+    
     public Container(Item parent)
     {
 	super(parent);
 	setItemType(Type.CONTAINER);
     }
-
+    
     /**
      * Set this container's type.
      * 
@@ -24,10 +26,10 @@ public class Container extends Item
      */
     public void setType(String ct)
     {
-	try{
+	try {
 	    setType(ContainerType.valueOf(ct.toUpperCase()));
-	}catch(Exception e)
-	{
+	}
+	catch(Exception e) {
 	    e.printStackTrace();
 	}
 	

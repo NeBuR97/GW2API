@@ -37,6 +37,8 @@ public enum Flag
      */
     NOMYSTICFORGE,
     
+    NONE,
+    
     /**
      * Not salvageable.
      */

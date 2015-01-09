@@ -1,5 +1,7 @@
 package de.nebur97.git.gw2api.item.attributes;
 
+import java.io.Serializable;
+
 /**
  * An object representing an attribute.
  * To create an attribute, use the factory method
@@ -8,13 +10,13 @@ package de.nebur97.git.gw2api.item.attributes;
  * @see AttributeType
  * @author NeBuR97
  **/
-public class Attribute
+public class Attribute implements Serializable
 {
     /**
-     * Attributes. <li>ConditionDamage <li>CritDamage (= Ferocity. It's called
-     * CritDamage in the API.) <li>Healing <li>Power <li>Precision <li>Toughness
-     * <li>Vitality
-     **/
+    * Attributes. <li>ConditionDamage <li>CritDamage (= Ferocity. It's called
+    * CritDamage in the API.) <li>Healing <li>Power <li>Precision <li>Toughness
+    * <li>Vitality
+    **/
     public enum AttributeType
     {
 	/**
@@ -65,46 +67,15 @@ public class Attribute
 	VITALITY;
     }
     
-    private int modifier;
+    private static final long serialVersionUID = -3859063184780135709L;
+    
     private AttributeType aT;
+    private int modifier;
     
     private Attribute(AttributeType aT, int mod)
     {
 	this.aT = aT;
 	modifier = mod;
-    }
-    
-    /**
-     * @return The attribute's modifier.
-     */
-    public int getModifier()
-    {
-	return modifier;
-    }
-    
-    /**
-     * @return The attribute's type
-     * @see AttributeType
-     */
-    public AttributeType getAttributeType()
-    {
-	return aT;
-    }
-    
-    /**
-     * Creates a new Attribute.
-     * 
-     * @param type
-     * - This String will be used in valueOf(type) to get the AttributeType.
-     * @see #createAttribute(AttributeType, int)
-     */
-    public static Attribute createAttribute(String type, int modifier)
-    {
-	try {
-	    return createAttribute(AttributeType.valueOf(type.toUpperCase()), modifier);
-	} catch(Exception e) {
-	    return null;
-	}
     }
     
     /**
@@ -128,9 +99,43 @@ public class Attribute
 	return (type != null ) ? new Attribute(type, modifier) : null;
     }
     
+    /**
+     * Creates a new Attribute.
+     * 
+     * @param type
+     * - This String will be used in valueOf(type) to get the AttributeType.
+     * @see #createAttribute(AttributeType, int)
+     */
+    public static Attribute createAttribute(String type, int modifier)
+    {
+	try {
+	    return createAttribute(AttributeType.valueOf(type.toUpperCase()), modifier);
+	}
+	catch(Exception e) {
+	    return null;
+	}
+    }
+    
+    /**
+     * @return The attribute's type
+     * @see AttributeType
+     */
+    public AttributeType getAttributeType()
+    {
+	return aT;
+    }
+    
+    /**
+     * @return The attribute's modifier.
+     */
+    public int getModifier()
+    {
+	return modifier;
+    }
+    
     @Override
     public String toString()
     {
-	return "Attribute: Type:"+aT+",modifier:"+modifier;
+	return "Attribute: Type:" + aT + ",modifier:" + modifier;
     }
 }

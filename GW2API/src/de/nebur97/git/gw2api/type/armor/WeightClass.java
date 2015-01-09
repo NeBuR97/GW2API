@@ -9,15 +9,15 @@ package de.nebur97.git.gw2api.type.armor;
  **/
 public enum WeightClass
 {
+    /** Town clothing **/
+    CLOTHING,
+    
     /** Heavy armor **/
     HEAVY,
-    
-    /** Medium armor **/
-    MEDIUM,
     
     /** Light armor **/
     LIGHT,
     
-    /** Town clothing **/
-    CLOTHING;
+    /** Medium armor **/
+    MEDIUM;
 }

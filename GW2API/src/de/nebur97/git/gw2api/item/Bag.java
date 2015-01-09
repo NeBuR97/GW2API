@@ -9,19 +9,15 @@ import de.nebur97.git.gw2api.type.Type;
  **/
 public class Bag extends Item
 {
+    private static final long serialVersionUID = 4572375528258362620L;
+    
+    private boolean noSellSort;
+    
+    private int size;
     public Bag(Item parent)
     {
 	super(parent);
 	setItemType(Type.BAG);
-    }
-
-    private int size;
-    private boolean noSellSort;
-    
-    @Override
-    public Type getType()
-    {
-	return Type.BAG;
     }
     
     /**
@@ -34,14 +30,10 @@ public class Bag extends Item
 	return size;
     }
     
-    /**
-     * Set the bag's size.
-     * 
-     * @param size
-     */
-    public void setSize(int size)
+    @Override
+    public Type getType()
     {
-	this.size = size;
+	return Type.BAG;
     }
     
     /**
@@ -64,5 +56,15 @@ public class Bag extends Item
     public void setNoSellSort(boolean noSellSort)
     {
 	this.noSellSort = noSellSort;
+    }
+    
+    /**
+     * Set the bag's size.
+     * 
+     * @param size
+     */
+    public void setSize(int size)
+    {
+	this.size = size;
     }
 }
