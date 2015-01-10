@@ -131,4 +131,14 @@ public class Consumable extends Item
     {
 	unlockType = ut;
     }
+    
+    @Override
+    public void setProperty(String prop, Object value)
+    {
+	if(prop.equals("duration_ms")) {
+	    setDurationMS((long) value);
+	} else {
+	    super.setProperty(prop, value);
+	}
+    }
 }

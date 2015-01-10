@@ -9,6 +9,7 @@ import java.util.List;
 
 import de.nebur97.git.gw2api.GW2API;
 import de.nebur97.git.gw2api.item.Item;
+import de.nebur97.git.gw2api.item.flags.Flag;
 import de.nebur97.git.gw2api.manager.item.ItemManager;
 
 public class TradingPost implements Iterable<TPEntry>, Serializable
@@ -128,7 +129,9 @@ public class TradingPost implements Iterable<TPEntry>, Serializable
 	List<Integer> ids = new ArrayList<Integer>();
 	
 	for(Item i : items) {
-	    ids.add(i.getID());
+	    if( !i.hasFlag(Flag.ACCOUNTBOUND)) {
+		ids.add(i.getID());
+	    }
 	}
 	loadEntries(ids);
     }
@@ -164,5 +167,10 @@ public class TradingPost implements Iterable<TPEntry>, Serializable
     public List<TPEntry> getEntries()
     {
 	return new ArrayList<TPEntry>(loaded.values());
+    }
+    
+    public int getEntryCount()
+    {
+	return loaded.size();
     }
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * This class provides features to manage items and recipes.
@@ -25,7 +26,7 @@ public abstract class Manager<T> implements Serializable
      */
     public synchronized void add(T obj)
     {
-	entryIDs.put(((EntryWithID) obj ).getID(), obj);
+	entryIDs.put(((EntryWithID) obj).getID(), obj);
     }
     
     /**
@@ -112,6 +113,24 @@ public abstract class Manager<T> implements Serializable
 	} else {
 	    throw new Exception("You cannot change the threadcount while threads are running!");
 	}
+    }
+    
+    public int getEntrySize()
+    {
+	return entryIDs.size();
+    }
+    
+    public List<T> getSpecificList(Collection<Integer> ids)
+    {
+	List<T> list = new ArrayList<T>();
+	for(int id : ids) {
+	    T t = entryIDs.get(id);
+	    if(t != null) {
+		System.out.println(id);
+		list.add(entryIDs.get(id));
+	    }
+	}
+	return list;
     }
     
 }

@@ -197,7 +197,7 @@ public class GW2API
      */
     public Recipe getRecipeViaOutputID(int outputID)
     {
-	return rCache.getRecipeViaOutputOD(outputID);
+	return rCache.getRecipeViaOutputID(outputID);
     }
     
     /**
@@ -249,24 +249,27 @@ public class GW2API
     /**
      * Load all caches from the given path
      * @param f
-     * @throws IOException
-     * @throws ClassNotFoundException
+     * @throws Exception 
      */
-    public void loadAll(File f) throws IOException, ClassNotFoundException
+    public static GW2API loadAll(File f) throws Exception
     {
+	if(api == null) {
+	    api = new GW2API();
+	}
 	String loc = f.getAbsolutePath() + "/";
 	ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File(loc + iMSuffix)));
-	iCache = (ItemManager) ois.readObject();
+	api.setItemManager((ItemManager) ois.readObject());
 	ois.close();
 	
 	ois = new ObjectInputStream(new FileInputStream(new File(loc + rMSuffix)));
-	rCache = (RecipeManager) ois.readObject();
+	api.setRecipeManager((RecipeManager) ois.readObject());
 	ois.close();
 	
 	ois = new ObjectInputStream(new FileInputStream(new File(loc + tPSuffix)));
-	tp = (TradingPost) ois.readObject();
-	tp.setItemManager(iCache);
+	api.setTradingPost((TradingPost) ois.readObject());
+	api.getTradingPost().setItemManager(api.getItemManager());
 	ois.close();
+	return api;
     }
     
     /**
@@ -439,5 +442,70 @@ public class GW2API
     public int getItemLoadingErrors()
     {
 	return iCache.getLoadingErrors();
+    }
+    
+    private void setItemManager(ItemManager man)
+    {
+	iCache = man;
+    }
+    
+    private void setRecipeManager(RecipeManager man)
+    {
+	rCache = man;
+    }
+    
+    private void setTradingPost(TradingPost tp)
+    {
+	this.tp = tp;
+    }
+    
+    public static GW2API loadAll(String path) throws Exception
+    {
+	return loadAll(new File(path));
+    }
+    
+    public int getNumberOfRecipes()
+    {
+	return rCache.getEntrySize();
+    }
+    
+    public int getNumberOfItems()
+    {
+	return iCache.getEntrySize();
+    }
+    
+    public int getNumberOfTradingPostEntries()
+    {
+	return tp.getEntryCount();
+    }
+    
+    @Override
+    public String toString()
+    {
+	return "Guild Wars 2 API, has " + getNumberOfRecipes() + " recipes, " + getNumberOfItems() + " items and " + getNumberOfTradingPostEntries() + " tradingpost entries loaded.";
+    }
+    
+    public List<Recipe> blockingLoadRecipes(Collection<Integer> ids)
+    {
+	loadRecipes(ids);
+	while(rCache.isLoading()) {}
+	System.out.println("list");
+	return rCache.getSpecificList(ids);
+    }
+    
+    public List<Item> blockingLoadItems(Collection<Integer> ids)
+    {
+	loadItems(ids);
+	while(itemsAreBeingLoaded()) {}
+	return iCache.getSpecificList(ids);
+    }
+    
+    public List<Integer> getOutputIDs(Collection<Recipe> re)
+    {
+	List<Integer> ids = new ArrayList<Integer>();
+	for(Recipe r : re) {
+	    ids.add(r.getOutputItemID());
+	}
+	return ids;
     }
 }

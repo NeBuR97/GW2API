@@ -24,7 +24,7 @@ public class RecipeManager extends Manager<Recipe>
 	outIDMap.put(id, r);
 	GW2API api = GW2API.getInstance();
 	Item i;
-	if((i = api.getItemViaID(id) ) != null) {
+	if((i = api.getItemViaID(id)) != null) {
 	    r.setOutputItemName(i.getName());
 	}
     }
@@ -34,7 +34,7 @@ public class RecipeManager extends Manager<Recipe>
 	return entryIDs.size() + "/" + idsToLoad;
     }
     
-    public Recipe getRecipeViaOutputOD(int outputItemID)
+    public Recipe getRecipeViaOutputID(int outputItemID)
     {
 	return outIDMap.get(outputItemID);
     }
@@ -61,7 +61,6 @@ public class RecipeManager extends Manager<Recipe>
 	}
 	
 	int index = 0;
-	System.out.println(sub.size());
 	for(int id : ids) {
 	    if( !isLoaded(id)) {
 		sub.get(index).add(id);
@@ -86,5 +85,17 @@ public class RecipeManager extends Manager<Recipe>
 	    }
 	    
 	}
+    }
+    
+    public List<Recipe> getSpecificListViaOutputID(Collection<Integer> ids)
+    {
+	List<Recipe> l = new ArrayList<Recipe>();
+	for(int id : ids) {
+	    Recipe r = getRecipeViaOutputID(id);
+	    if(r != null) {
+		l.add(r);
+	    }
+	}
+	return l;
     }
 }

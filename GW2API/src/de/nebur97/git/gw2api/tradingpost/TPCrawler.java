@@ -17,6 +17,7 @@ public class TPCrawler extends Thread
     private TPEntry entry;
     private List<Integer> ids;
     private TradingPost tp;
+    private static int maxIdsPerQuery = 150;
     
     public TPCrawler(TradingPost tp, Collection<Integer> ids)
     {
@@ -30,9 +31,9 @@ public class TPCrawler extends Thread
 	try {
 	    String idsStr = "";
 	    int idsSize = ids.size();
-	    int idsPerQuery = idsSize < 200 ? idsSize : 200;
+	    int idsPerQuery = idsSize < maxIdsPerQuery ? idsSize : maxIdsPerQuery;
 	    for(int a = 0; a < idsSize; a += idsPerQuery) {
-		for(int b = a; b < idsPerQuery; b++) {
+		for(int b = a; b < (idsPerQuery + a); b++) {
 		    int id = ids.get(b);
 		    idsStr += id + ",";
 		}
@@ -69,6 +70,7 @@ public class TPCrawler extends Thread
 			}
 		    }
 		}
+		System.out.println("Loaded " + idsPerQuery + " entries");
 	    }
 	}
 	catch(MalformedURLException e) {
@@ -84,7 +86,7 @@ public class TPCrawler extends Thread
     private void object(boolean buys)
     {
 	Event e;
-	while((e = crawler.next() ) != Event.END_OBJECT) {
+	while((e = crawler.next()) != Event.END_OBJECT) {
 	    if(e == Event.KEY_NAME) {
 		switch(crawler.getString())
 		{
