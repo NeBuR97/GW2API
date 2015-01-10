@@ -96,7 +96,7 @@ public class Attribute implements Serializable
      */
     public static Attribute createAttribute(AttributeType type, int modifier)
     {
-	return (type != null ) ? new Attribute(type, modifier) : null;
+	return type != null ? new Attribute(type, modifier) : null;
     }
     
     /**
@@ -109,7 +109,7 @@ public class Attribute implements Serializable
     public static Attribute createAttribute(String type, int modifier)
     {
 	try {
-	    return createAttribute(AttributeType.valueOf(type.toUpperCase()), modifier);
+	    return Attribute.createAttribute(AttributeType.valueOf(type.toUpperCase()), modifier);
 	}
 	catch(Exception e) {
 	    return null;

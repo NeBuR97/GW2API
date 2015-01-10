@@ -18,6 +18,7 @@ public class Armor extends Gear
     private int def;
     
     private WeightClass wClass;
+    
     public Armor(Item parent)
     {
 	super(parent);

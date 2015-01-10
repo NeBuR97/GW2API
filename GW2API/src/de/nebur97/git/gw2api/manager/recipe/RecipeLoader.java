@@ -74,7 +74,7 @@ public class RecipeLoader extends Thread
 				break;
 			    default:
 				e = p.next();
-				r.setProperty(name, (e == Event.VALUE_STRING ) ? p.getString() : p.getInt());
+				r.setProperty(name, e == Event.VALUE_STRING ? p.getString() : p.getInt());
 			}
 		    }
 		}
@@ -87,7 +87,7 @@ public class RecipeLoader extends Thread
 	    }
 	    c++;
 	    cache.add(r);
-	    System.out.println(this.getName() + " loaded recipe: " + c + "/" + ids.size() + " " + r.getID() + " in " + (System.currentTimeMillis() - start ) + "ms");
+	    System.out.println(getName() + " loaded recipe: " + c + "/" + ids.size() + " " + r.getID() + " in " + (System.currentTimeMillis() - start ) + "ms");
 	}
 	cache.incrementFinishedThreads();
 	System.out.println(getName() + " is finished, total of " + cache.getFinishedThreads() + " finished threads.");

@@ -117,26 +117,26 @@ public class ItemLoader extends Thread implements Runnable
 								}
 							    }
 							} else {
-							    item.setProperty(key, (parser.next() == Event.VALUE_STRING ) ? parser.getString() : parser.getInt());
+							    item.setProperty(key, parser.next() == Event.VALUE_STRING ? parser.getString() : parser.getInt());
 							}
 						    }
 						}
 						break;
 					    default:
-						item.setProperty(key, (parser.next() == Event.VALUE_STRING ) ? parser.getString() : parser.getInt());
+						item.setProperty(key, parser.next() == Event.VALUE_STRING ? parser.getString() : parser.getInt());
 					}
 				    }
 				}
 				break;
 			    default: {
 				e = parser.next();
-				item.setProperty(name, ((e == Event.VALUE_STRING ) ? parser.getString() : parser.getInt() ));
+				item.setProperty(name, e == Event.VALUE_STRING ? parser.getString() : parser.getInt());
 			    }
 			}
 		    }
 		}
 		c++;
-		System.out.println(this.getName() + " loaded item: " + c + "/" + ids.size() + " " + item.getID() + "," + item.getName() + " in " + (System.currentTimeMillis() - start ) + "ms");
+		System.out.println(getName() + " loaded item: " + c + "/" + ids.size() + " " + item.getID() + "," + item.getName() + " in " + (System.currentTimeMillis() - start ) + "ms");
 		cache.add(item);
 	    }
 	    catch(Exception e) {

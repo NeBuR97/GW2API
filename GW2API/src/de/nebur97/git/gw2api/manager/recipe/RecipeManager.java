@@ -54,7 +54,7 @@ public class RecipeManager extends Manager<Recipe>
 	    }
 	}
 	idsToLoad = ids.size();
-	neededThreads = (idsToLoad < threadCount ) ? idsToLoad : threadCount;
+	neededThreads = idsToLoad < threadCount ? idsToLoad : threadCount;
 	List<List<Integer>> sub = new ArrayList<List<Integer>>();
 	for(int a = 0; a < neededThreads; a++) {
 	    sub.add(new ArrayList<Integer>());

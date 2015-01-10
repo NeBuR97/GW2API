@@ -14,6 +14,7 @@ public class Bag extends Item
     private boolean noSellSort;
     
     private int size;
+    
     public Bag(Item parent)
     {
 	super(parent);

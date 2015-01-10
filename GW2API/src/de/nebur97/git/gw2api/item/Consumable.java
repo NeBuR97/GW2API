@@ -18,6 +18,7 @@ public class Consumable extends Item
     private long durMS;
     private int recipeID;
     private UnlockType unlockType = UnlockType.NONE;
+    
     public Consumable(Item parent)
     {
 	super(parent);

@@ -30,7 +30,7 @@ public class TPCrawler extends Thread
 	try {
 	    String idsStr = "";
 	    int idsSize = ids.size();
-	    int idsPerQuery = (idsSize < 200 ) ? idsSize : 200;
+	    int idsPerQuery = idsSize < 200 ? idsSize : 200;
 	    for(int a = 0; a < idsSize; a += idsPerQuery) {
 		for(int b = a; b < idsPerQuery; b++) {
 		    int id = ids.get(b);

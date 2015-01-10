@@ -38,7 +38,7 @@ public class TradingPost implements Iterable<TPEntry>, Serializable
 	if(l <= 2) {
 	    return line + " c";
 	} else if(l <= 4) {
-	    return line.substring(0, (l == 3 ) ? 1 : 2) + " s " + line.substring(l - 2, l);
+	    return line.substring(0, l == 3 ? 1 : 2) + " s " + line.substring(l - 2, l);
 	} else {
 	    return line.substring(0, l - 4) + " g " + line.substring(l - 4, l - 2) + " s " + line.substring(l - 2) + " c";
 	}

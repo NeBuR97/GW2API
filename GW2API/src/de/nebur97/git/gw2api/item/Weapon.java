@@ -24,6 +24,7 @@ public class Weapon extends Gear
     
     private int maxPow;
     private int minPow;
+    
     public Weapon(Item parent)
     {
 	super(parent);

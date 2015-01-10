@@ -22,6 +22,7 @@ public class Gear extends Item implements Infusable
     
     private List<Attribute> stats = new ArrayList<Attribute>();
     private int suffixID;
+    
     public Gear(Item parent)
     {
 	super(parent);

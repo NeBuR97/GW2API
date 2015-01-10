@@ -55,7 +55,7 @@ public class ItemManager extends Manager<Item>
 	// create a list for each thread
 	List<List<Integer>> sub = new ArrayList<List<Integer>>();
 	
-	neededThreads = (idsToLoad < threadCount ) ? idsToLoad : threadCount;
+	neededThreads = idsToLoad < threadCount ? idsToLoad : threadCount;
 	for(int a = 0; a < neededThreads; a++) {
 	    sub.add(new ArrayList<Integer>());
 	}
