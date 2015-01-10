@@ -430,4 +430,9 @@ public class GW2API
 	    throw e;
 	}
     }
+    
+    public List<TPEntry> getTradingPostEntries()
+    {
+	return tp.getEntries();
+    }
 }

@@ -160,4 +160,9 @@ public class TradingPost implements Iterable<TPEntry>, Serializable
 	}
 	this.loading = loading;
     }
+    
+    public List<TPEntry> getEntries()
+    {
+	return new ArrayList<TPEntry>(loaded.values());
+    }
 }
