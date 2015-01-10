@@ -105,4 +105,9 @@ public class ItemManager extends Manager<Item>
 	    
 	}
     }
+    
+    public int getLoadingErrors()
+    {
+	return errors;
+    }
 }

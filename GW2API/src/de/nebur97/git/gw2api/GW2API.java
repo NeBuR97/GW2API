@@ -435,4 +435,9 @@ public class GW2API
     {
 	return tp.getEntries();
     }
+    
+    public int getItemLoadingErrors()
+    {
+	return iCache.getLoadingErrors();
+    }
 }
